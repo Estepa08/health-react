@@ -1,20 +1,20 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Card } from 'react-bootstrap';
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import GreenCard from './components/GreenCard'
 
 function App() {
-    return (
-        <Container className="mt-5">
-            <Card className="shadow-lg border-0">
-                <Card.Body className="p-5 text-center">
-                    <h1 className="display-4 mb-4">🏥 Health React</h1>
-                    <p className="lead text-muted">Проект успешно создан!</p>
-                    <hr />
-                    <p className="text-success"></p>
-                </Card.Body>
-            </Card>
-        </Container>
-    );
+  return (
+    <div className="container">
+      <h1 className="text-center my-5"></h1>
+      <div className="row justify-content-center g-4">
+        {[1, 2, 3, 4, 5, 6 ].map((_, i) => (
+          <div key={i} className="col-sm-6 col-md-5 col-lg-4 d-flex justify-content-center">
+            <GreenCard />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
 
-export default App;
+export default App
