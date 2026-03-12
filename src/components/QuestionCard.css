@@ -1,6 +1,6 @@
 .question-card {
   width: 18rem;
-  background-color: #5640af; /* твой фирменный цвет */
+  background-color: #5640af;
   color: white;
   border-radius: 0.5rem;
   overflow: hidden;
@@ -22,14 +22,12 @@
   font-size: 1.1rem;
   text-align: center;
   margin-bottom: 1rem;
-  line-height: 1.4;
 }
 
 .question-card__options {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 .question-card__option {
@@ -40,21 +38,11 @@
   background-color: #f8f9fa;
   color: #000;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.question-card__option:hover {
-  background-color: #e2e6ea;
-  transform: translateY(-2px);
 }
 
 .question-card__option--selected {
   background-color: #0d6efd;
   color: white;
-}
-
-.question-card__option--selected:hover {
-  background-color: #0b5ed7;
 }
 
 .question-card__submit {
@@ -67,15 +55,4 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.question-card__submit:hover {
-  background-color: #157347;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.question-card__submit:active {
-  transform: translateY(0);
 }
