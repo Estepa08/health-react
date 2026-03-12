@@ -7,7 +7,5 @@
   "jsxBracketSameLine": false,
   "jsxSingleQuote": false,
   "arrowParens": "always",
-  "endOfLine": "auto",
-  "bracketSpacing": true,
-  "htmlWhitespaceSensitivity": "css"
+  "endOfLine": "auto"
 }
