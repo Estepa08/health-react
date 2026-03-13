@@ -1,35 +1,39 @@
 .layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* header auto, main растягивается, footer auto */
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid red; 
+  width: 100%;
 }
 
 .layout__header {
   background: linear-gradient(135deg, #5640af, #7b68ee);
-  padding: 1rem 0;
+  padding: 1rem 2rem;
 }
 
 .layout__title {
   margin: 0;
   color: white;
   font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .layout__main {
-  flex: 1;
+  display: grid;
+
+  place-items: center; /* центрирование по горизонтали и вертикали */
+  padding: 2rem;
   background-color: #f8f9fa;
-  padding: 2rem 0;
 }
 
 .layout__footer {
+  text-align: center;
+  padding: 1rem 2rem;
   background-color: white;
-  padding: 1rem 0;
   border-top: 1px solid #dee2e6;
 }
 
 .layout__copyright {
   margin: 0;
-  text-align: center;
   color: #6c757d;
+  font-size: 0.9rem;
 }
