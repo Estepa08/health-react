@@ -9,4 +9,4 @@ npm-debug.log*
 .env.*.local
 
 .claude/skills/
-.agents/skills/
+.agents/skills/skills-lock.json
