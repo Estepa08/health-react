@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { fetchLastResult } from '../api/results'
 import { fetchResultLevels } from '../api/resultLevels'
+import { findResultLevel } from '../utils/findResultLevel'
 
 function ResultPage() {
   const navigate = useNavigate()
@@ -34,9 +35,7 @@ function ResultPage() {
 
   if (loading || totalScore === undefined) return null
 
-  const level = resultLevels.find(
-    (item) => totalScore >= item.minScore && totalScore <= item.maxScore
-  )
+  const level = findResultLevel(resultLevels, totalScore)
 
   return (
     <Layout>

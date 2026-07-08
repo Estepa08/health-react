@@ -1,69 +1,29 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import Layout from '../components/Layout'
-import { fetchResults } from '../api/results'
-import { fetchResultLevels } from '../api/resultLevels'
+import { Calendar3, ClipboardData, GraphUp, Star } from 'react-bootstrap-icons'
+import DashboardLayout from '../components/DashboardLayout'
+import { useDashboardData } from '../hooks/useDashboardData'
+import { computeStats, formatDate, groupByTheme } from '../utils/dashboardStats'
+import { findResultLevel } from '../utils/findResultLevel'
 
-function formatDate(isoString) {
-  return new Date(isoString).toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })
-}
-
-function groupByTheme(results) {
-  const byTheme = new Map()
-  for (const result of results) {
-    if (!byTheme.has(result.themeId)) {
-      byTheme.set(result.themeId, { themeTitle: result.themeTitle, points: [] })
-    }
-    byTheme.get(result.themeId).points.push({
-      date: formatDate(result.createdAt),
-      score: result.score,
-    })
-  }
-  return Array.from(byTheme.values())
-}
+const STAT_CARDS = [
+  {
+    key: 'totalAttempts',
+    label: 'Пройдено тестов',
+    icon: ClipboardData,
+    badge: 'icon-badge-primary',
+  },
+  { key: 'averageScore', label: 'Средний балл', icon: GraphUp, badge: 'icon-badge-info' },
+  { key: 'lastAttempt', label: 'Последний тест', icon: Calendar3, badge: 'icon-badge-success' },
+  { key: 'favoriteTheme', label: 'Частая тема', icon: Star, badge: 'icon-badge-warning' },
+]
 
 function DashboardPage() {
   const navigate = useNavigate()
-  const [results, setResults] = useState(null)
-  const [resultLevels, setResultLevels] = useState([])
-  const [error, setError] = useState(null)
+  const { results, resultLevels, error } = useDashboardData()
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) {
-      navigate('/', { replace: true })
-    }
-  }, [navigate])
-
-  useEffect(() => {
-    fetchResults()
-      .then(setResults)
-      .catch((err) => setError(err.message))
-  }, [])
-
-  useEffect(() => {
-    fetchResultLevels()
-      .then(setResultLevels)
-      .catch(() => setResultLevels([]))
-  }, [])
-
-  const stats = useMemo(() => {
-    if (!results || results.length === 0) return null
-
-    const totalAttempts = results.length
-    const averageScore = Math.round(
-      results.reduce((sum, result) => sum + result.score, 0) / totalAttempts
-    )
-    const lastAttempt = results[results.length - 1]
-
-    const countByTheme = new Map()
-    for (const result of results) {
-      countByTheme.set(result.themeTitle, (countByTheme.get(result.themeTitle) ?? 0) + 1)
-    }
-    const favoriteTheme = Array.from(countByTheme.entries()).sort((a, b) => b[1] - a[1])[0][0]
-
-    return { totalAttempts, averageScore, lastAttempt, favoriteTheme }
-  }, [results])
+  const stats = useMemo(() => computeStats(results), [results])
 
   const themeGroups = useMemo(() => (results ? groupByTheme(results) : []), [results])
 
@@ -71,123 +31,126 @@ function DashboardPage() {
 
   if (error) {
     return (
-      <Layout>
+      <DashboardLayout>
         <p className="text-danger text-center text-meta">{error}</p>
-      </Layout>
+      </DashboardLayout>
     )
   }
 
   if (results === null) {
     return (
-      <Layout>
+      <DashboardLayout>
         <p className="text-center text-meta">Загрузка истории...</p>
-      </Layout>
+      </DashboardLayout>
     )
   }
 
   if (results.length === 0) {
     return (
-      <Layout>
+      <DashboardLayout>
         <div className="text-center">
           <p className="text-meta mb-4">У вас пока нет пройденных тестов.</p>
           <button className="btn btn-primary" onClick={() => navigate('/survey')}>
             Пройти первый тест
           </button>
         </div>
-      </Layout>
+      </DashboardLayout>
     )
   }
 
-  return (
-    <Layout>
-      <div className="row row-cols-2 row-cols-md-4 g-3 mb-4">
-        <div className="col">
-          <div className="card text-center h-100">
-            <div className="card-body">
-              <div className="fs-4">{stats.totalAttempts}</div>
-              <div className="text-meta">Пройдено тестов</div>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card text-center h-100">
-            <div className="card-body">
-              <div className="fs-4">{stats.averageScore}</div>
-              <div className="text-meta">Средний балл</div>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card text-center h-100">
-            <div className="card-body">
-              <div className="fs-4">{formatDate(stats.lastAttempt.createdAt)}</div>
-              <div className="text-meta">Последний тест</div>
-            </div>
-          </div>
-        </div>
-        <div className="col">
-          <div className="card text-center h-100">
-            <div className="card-body">
-              <div className="fs-4">{stats.favoriteTheme}</div>
-              <div className="text-meta">Частая тема</div>
-            </div>
-          </div>
-        </div>
-      </div>
+  const statValues = {
+    totalAttempts: stats.totalAttempts,
+    averageScore: stats.averageScore,
+    lastAttempt: formatDate(stats.lastAttempt.createdAt),
+    favoriteTheme: stats.favoriteTheme,
+  }
 
-      <div className="row row-cols-1 row-cols-md-2 g-3 mb-4">
-        {themeGroups.map((group) => (
-          <div className="col" key={group.themeTitle}>
-            <div className="card h-100">
-              <div className="card-body">
-                <h6 className="card-title mb-3">{group.themeTitle}</h6>
-                {group.points.length > 1 ? (
-                  <ResponsiveContainer width="100%" height={160}>
-                    <LineChart data={group.points}>
-                      <XAxis dataKey="date" fontSize={12} />
-                      <YAxis fontSize={12} allowDecimals={false} />
-                      <Tooltip />
-                      <Line type="monotone" dataKey="score" stroke="#2f5896" strokeWidth={2} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                ) : (
-                  <p className="text-meta mb-0">
-                    Балл: {group.points[0].score} ({group.points[0].date}). Пройдите тест ещё раз,
-                    чтобы увидеть динамику.
-                  </p>
-                )}
+  return (
+    <DashboardLayout>
+      <div className="row row-cols-2 row-cols-md-4 g-3 mb-4">
+        {STAT_CARDS.map((card) => (
+          <div className="col" key={card.key}>
+            <div className="card card-material h-100">
+              <div className="card-body d-flex flex-column gap-2">
+                <span className={`icon-badge ${card.badge}`}>
+                  <card.icon />
+                </span>
+                <div
+                  className="fs-4 stat-value"
+                  title={card.key === 'favoriteTheme' ? statValues[card.key] : undefined}
+                >
+                  {statValues[card.key]}
+                </div>
+                <div className="text-meta">{card.label}</div>
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="table-responsive mb-4">
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Дата</th>
-              <th>Тема</th>
-              <th>Балл</th>
-              <th>Уровень</th>
-            </tr>
-          </thead>
-          <tbody>
-            {historyRows.map((result) => {
-              const level = resultLevels.find(
-                (item) => result.score >= item.minScore && result.score <= item.maxScore
-              )
-              return (
-                <tr key={result.id}>
-                  <td>{formatDate(result.createdAt)}</td>
-                  <td>{result.themeTitle}</td>
-                  <td>{result.score}</td>
-                  <td>{level ? `${level.emoji ?? ''} ${level.title}`.trim() : '—'}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+      <div className="row row-cols-1 row-cols-md-2 g-3 mb-4">
+        {themeGroups.map((group) => (
+          <div className="col" key={group.themeTitle}>
+            <div className="card card-material h-100">
+              <div className="card-body d-flex flex-column">
+                <h6 className="card-title mb-3">{group.themeTitle}</h6>
+                <div className="theme-chart-area flex-grow-1 d-flex align-items-center">
+                  {group.points.length > 1 ? (
+                    <ResponsiveContainer width="100%" height={160}>
+                      <LineChart data={group.points}>
+                        <XAxis dataKey="date" fontSize={12} />
+                        <YAxis fontSize={12} allowDecimals={false} />
+                        <Tooltip />
+                        <Line type="monotone" dataKey="score" stroke="#1a73e8" strokeWidth={2} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <p className="text-meta mb-0">
+                      Балл: {group.points[0].score} ({group.points[0].date}). Пройдите тест ещё раз,
+                      чтобы увидеть динамику.
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="card card-material mb-4">
+        <div className="table-responsive">
+          <table className="table table-material mb-0">
+            <thead>
+              <tr>
+                <th>Дата</th>
+                <th>Тема</th>
+                <th>Балл</th>
+                <th>Уровень</th>
+              </tr>
+            </thead>
+            <tbody>
+              {historyRows.map((result) => {
+                const level = findResultLevel(resultLevels, result.score)
+                return (
+                  <tr key={result.id}>
+                    <td>{formatDate(result.createdAt)}</td>
+                    <td>{result.themeTitle}</td>
+                    <td>{result.score}</td>
+                    <td>
+                      {level ? (
+                        <span className="level-badge">
+                          {level.emoji ?? ''} {level.title}
+                        </span>
+                      ) : (
+                        '—'
+                      )}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className="text-center">
@@ -195,7 +158,7 @@ function DashboardPage() {
           Пройти новый тест
         </button>
       </div>
-    </Layout>
+    </DashboardLayout>
   )
 }
 
