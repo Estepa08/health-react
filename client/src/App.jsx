@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import HomePage from './pages/HomePage'
 import SurveyPage from './pages/SurveyPage'
 import ResultPage from './pages/ResultPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/survey" element={<SurveyPage />} />
       <Route path="/result" element={<ResultPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

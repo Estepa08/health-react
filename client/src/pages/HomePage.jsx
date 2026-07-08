@@ -1,15 +1,35 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Layout from '../components/Layout'
-import { login, register } from '../api/auth'
+import { getMe, login, register } from '../api/auth'
 import { loginSchema, registerSchema } from '../validation/authSchemas'
 import { buttonColors } from '../utils/buttonColors'
 
 function HomePage() {
   const [mode, setMode] = useState('login')
   const [submitError, setSubmitError] = useState(null)
+  const [checkingToken, setCheckingToken] = useState(true)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      setCheckingToken(false)
+      return
+    }
+
+    getMe(token)
+      .then(({ user }) => {
+        localStorage.setItem('user', JSON.stringify(user))
+        navigate('/survey', { replace: true })
+      })
+      .catch(() => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        setCheckingToken(false)
+      })
+  }, [navigate])
 
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitError(null)
@@ -24,6 +44,8 @@ function HomePage() {
       setSubmitting(false)
     }
   }
+
+  if (checkingToken) return null
 
   return (
     <Layout>

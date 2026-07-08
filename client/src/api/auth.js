@@ -21,3 +21,11 @@ export async function login({ email, password }) {
   if (!res.ok) throw new Error(data.error || 'Не удалось войти')
   return data
 }
+
+export async function getMe(token) {
+  const res = await fetch(`${API_URL}/api/auth/me`, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  if (!res.ok) throw new Error('Недействительный токен')
+  return res.json()
+}

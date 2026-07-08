@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { eq } from 'drizzle-orm'
 import { db } from '../db/client.js'
 import { users } from '../db/schema.js'
+import { requireAuth } from '../middleware/auth.js'
 
 export const authRouter = Router()
 
@@ -60,6 +61,23 @@ authRouter.post('/login', async (req, res, next) => {
       token: issueToken(user),
       user: { id: user.id, name: user.name, email: user.email },
     })
+  } catch (err) {
+    next(err)
+  }
+})
+
+authRouter.get('/me', requireAuth, async (req, res, next) => {
+  try {
+    const [user] = await db
+      .select({ id: users.id, name: users.name, email: users.email })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+
+    if (!user) {
+      return res.status(401).json({ error: 'Пользователь не найден' })
+    }
+
+    res.json({ user })
   } catch (err) {
     next(err)
   }
