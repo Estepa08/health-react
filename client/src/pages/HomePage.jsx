@@ -1,23 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import Layout from '../components/Layout'
 import { login, register } from '../api/client'
-
-const loginSchema = Yup.object({
-  email: Yup.string().email('Некорректный email').required('Обязательное поле'),
-  password: Yup.string().min(6, 'Минимум 6 символов').required('Обязательное поле'),
-})
-
-const registerSchema = Yup.object({
-  name: Yup.string().min(2, 'Минимум 2 символа').required('Обязательное поле'),
-  email: Yup.string().email('Некорректный email').required('Обязательное поле'),
-  password: Yup.string().min(6, 'Минимум 6 символов').required('Обязательное поле'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Пароли не совпадают')
-    .required('Обязательное поле'),
-})
+import { loginSchema, registerSchema } from '../validation/authSchemas'
 
 function HomePage() {
   const [mode, setMode] = useState('login')
