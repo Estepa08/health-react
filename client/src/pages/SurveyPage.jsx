@@ -5,6 +5,7 @@ import QuestionCard from '../components/QuestionCard'
 import ThemeSelector from '../components/ThemeSelector'
 import { fetchThemes, fetchQuestions } from '../api/client'
 import { calculateScore } from '../utils/calculateScore'
+import { saveLastResult } from '../utils/resultHistory'
 
 function SurveyPage() {
   const navigate = useNavigate()
@@ -66,8 +67,14 @@ function SurveyPage() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
     } else {
-      navigate('/result', { state: { totalScore: calculateScore(answers) } })
+      const totalScore = calculateScore(answers)
+      saveLastResult({ themeId: selectedTheme, totalScore })
+      navigate('/result', { state: { totalScore } })
     }
+  }
+
+  const viewHistory = () => {
+    navigate('/result')
   }
 
   const progress = hasStarted ? (currentIndex / (questions.length - 1)) * 100 : 0
@@ -77,6 +84,11 @@ function SurveyPage() {
       <Layout>
         {themesError && <p className="text-danger text-center">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
+        <div className="text-center mt-3">
+          <button className="btn btn-outline-secondary" onClick={viewHistory}>
+            Просмотр истории
+          </button>
+        </div>
       </Layout>
     )
   }

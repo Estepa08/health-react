@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
+import { getLastResult } from '../utils/resultHistory'
 
 function ResultPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const totalScore = location.state?.totalScore
+  const totalScore = location.state?.totalScore ?? getLastResult()?.totalScore
 
   useEffect(() => {
     if (totalScore === undefined) {
