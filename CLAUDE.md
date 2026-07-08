@@ -65,6 +65,18 @@ There is no test runner configured in either `client/` or `server/`.
 - `utils/calculateScore.js` — server-side scorer used by `routes/results.js` (mirrors the client's version, sums answer values).
 - `sql/` (if present) holds the original raw schema/seed SQL this schema was derived from; `drizzle/` holds generated migrations from `drizzle-kit`.
 
+## Git workflow
+
+`main` is protected — never push directly to it. Every change goes through a feature branch + Pull Request:
+
+1. `git checkout -b feature/short-descriptive-name` — branch off before making changes.
+2. Commit as usual (`git add`, `git commit`).
+3. `git push origin feature/short-descriptive-name` — push the branch, not `main`.
+4. Open a Pull Request on GitHub (`gh pr create` or the "Compare & pull request" banner).
+5. Merge the PR on GitHub once ready (no required approvals for solo work — the green "Merge pull request" button is enough).
+6. `git checkout main && git pull` to sync locally.
+7. Optionally delete the merged branch (`git branch -d feature/...`; GitHub also offers to delete it after merge).
+
 ## Known gaps / in-progress security work
 
 - Client still stores the JWT and user object in `localStorage` rather than an `httpOnly` cookie session; auth checks and result requests do send the `Authorization` header now, but a stolen/XSS-exposed token remains usable until it expires (7d).
