@@ -7,6 +7,7 @@ import { fetchThemes } from '../api/themes'
 import { fetchQuestions } from '../api/questions'
 import { calculateScore } from '../utils/calculateScore'
 import { saveLastResult } from '../utils/resultHistory'
+import { buttonColors } from '../utils/buttonColors'
 
 function SurveyPage() {
   const navigate = useNavigate()
@@ -86,7 +87,11 @@ function SurveyPage() {
         {themesError && <p className="text-danger text-center">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
         <div className="text-center mt-3">
-          <button className="btn btn-outline-secondary" onClick={viewHistory}>
+          <button
+            className="btn btn-outline-secondary"
+            style={{ backgroundColor: buttonColors.outlineSecondary }}
+            onClick={viewHistory}
+          >
             Просмотр истории
           </button>
         </div>
@@ -107,7 +112,11 @@ function SurveyPage() {
       <Layout>
         <p className="text-danger text-center">{questionsError}</p>
         <div className="text-center">
-          <button className="btn btn-primary" onClick={restart}>
+          <button
+            className="btn btn-primary"
+            style={{ backgroundColor: buttonColors.primary }}
+            onClick={restart}
+          >
             Назад к выбору теста
           </button>
         </div>
@@ -134,10 +143,20 @@ function SurveyPage() {
         className="d-flex justify-content-between"
         style={{ width: '18rem', margin: '1rem auto 0 auto' }}
       >
-        <button className="btn btn-secondary" onClick={goBack} disabled={currentIndex === 0}>
+        <button
+          className="btn btn-secondary"
+          style={{ backgroundColor: buttonColors.secondary }}
+          onClick={goBack}
+          disabled={currentIndex === 0}
+        >
           Назад
         </button>
-        <button className="btn btn-primary" onClick={goNext} disabled={selectedValue === undefined}>
+        <button
+          className="btn btn-primary"
+          style={{ backgroundColor: buttonColors.primary }}
+          onClick={goNext}
+          disabled={selectedValue === undefined}
+        >
           {currentIndex < questions.length - 1 ? 'Далее' : 'Завершить'}
         </button>
       </div>

@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Layout from '../components/Layout'
 import { login, register } from '../api/auth'
 import { loginSchema, registerSchema } from '../validation/authSchemas'
+import { buttonColors } from '../utils/buttonColors'
 
 function HomePage() {
   const [mode, setMode] = useState('login')
@@ -34,6 +35,10 @@ function HomePage() {
                 <button
                   type="button"
                   className={`nav-link ${mode === 'login' ? 'active' : ''}`}
+                  style={{
+                    backgroundColor:
+                      mode === 'login' ? buttonColors.navActive : buttonColors.navInactive,
+                  }}
                   onClick={() => setMode('login')}
                 >
                   Вход
@@ -43,6 +48,10 @@ function HomePage() {
                 <button
                   type="button"
                   className={`nav-link ${mode === 'register' ? 'active' : ''}`}
+                  style={{
+                    backgroundColor:
+                      mode === 'register' ? buttonColors.navActive : buttonColors.navInactive,
+                  }}
                   onClick={() => setMode('register')}
                 >
                   Регистрация
@@ -98,6 +107,7 @@ function HomePage() {
                       <button
                         type="submit"
                         className="btn btn-primary w-100"
+                        style={{ backgroundColor: buttonColors.primary }}
                         disabled={isSubmitting}
                       >
                         Войти
@@ -184,6 +194,7 @@ function HomePage() {
                       <button
                         type="submit"
                         className="btn btn-primary w-100"
+                        style={{ backgroundColor: buttonColors.primary }}
                         disabled={isSubmitting}
                       >
                         Зарегистрироваться

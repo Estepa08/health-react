@@ -1,3 +1,5 @@
+import { buttonColors } from '../utils/buttonColors'
+
 function QuestionCard({ questionData, selectedValue, onSelect }) {
   if (!questionData) return null
 
@@ -14,6 +16,12 @@ function QuestionCard({ questionData, selectedValue, onSelect }) {
                 key={option.value}
                 type="button"
                 className={`btn ${option.value === selectedValue ? 'btn-primary' : 'btn-outline-primary'}`}
+                style={{
+                  backgroundColor:
+                    option.value === selectedValue
+                      ? buttonColors.primary
+                      : buttonColors.outlinePrimary,
+                }}
                 onClick={() => onSelect(option.value)}
               >
                 {option.label}
