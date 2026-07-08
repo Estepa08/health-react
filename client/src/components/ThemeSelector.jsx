@@ -1,18 +1,25 @@
+import { Carousel } from 'react-bootstrap'
+
 function ThemeSelector({ themes, onSelect }) {
   return (
-    <div className="d-grid gap-2">
+    <Carousel interval={null} className="theme-selector-carousel" indicators={false}>
       {themes.map((theme) => (
-        <button
-          key={theme.id}
-          type="button"
-          className="btn btn-outline-primary text-start"
-          onClick={() => onSelect(theme.id)}
-        >
-          <span className="me-2">{theme.icon}</span>
-          {theme.title}
-        </button>
+        <Carousel.Item key={theme.id}>
+          <div className="d-flex justify-content-center px-5">
+            <div
+              className="card"
+              style={{ width: '320px', height: '480px', cursor: 'pointer' }}
+              onClick={() => onSelect(theme.id)}
+            >
+              <img src="/images/theme.jpeg" className="card-img-top" alt={theme.title} />
+              <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                <p className="card-text">{theme.description}</p>
+              </div>
+            </div>
+          </div>
+        </Carousel.Item>
       ))}
-    </div>
+    </Carousel>
   )
 }
 

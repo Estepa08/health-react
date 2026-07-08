@@ -19,8 +19,6 @@ function SurveyPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [hasStarted, setHasStarted] = useState(false)
-  const [showResult, setShowResult] = useState(false)
-  const [totalScore, setTotalScore] = useState(0)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -50,7 +48,6 @@ function SurveyPage() {
     setCurrentIndex(0)
     setAnswers({})
     setHasStarted(false)
-    setShowResult(false)
   }
 
   const currentQuestion = questions[currentIndex]
@@ -69,8 +66,7 @@ function SurveyPage() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
     } else {
-      setTotalScore(calculateScore(answers))
-      setShowResult(true)
+      navigate('/result', { state: { totalScore: calculateScore(answers) } })
     }
   }
 
@@ -100,19 +96,6 @@ function SurveyPage() {
         <div className="text-center">
           <button className="btn btn-primary" onClick={restart}>
             Назад к выбору теста
-          </button>
-        </div>
-      </Layout>
-    )
-  }
-
-  if (showResult) {
-    return (
-      <Layout>
-        <div style={{ textAlign: 'center' }}>
-          <h1>{totalScore}</h1>
-          <button className="btn btn-primary" onClick={restart}>
-            Пройти заново
           </button>
         </div>
       </Layout>
