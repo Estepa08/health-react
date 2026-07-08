@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Layout from '../components/Layout'
-import { login, register } from '../api/client'
+import { login, register } from '../api/auth'
 import { loginSchema, registerSchema } from '../validation/authSchemas'
 
 function HomePage() {
