@@ -144,6 +144,26 @@
   vertical-align: middle;
 }
 
+.form-control:focus {
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.2);
+}
+
+.auth-tabs .nav-link {
+  border: none;
+  border-radius: 0.65rem;
+  color: #67748e;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.auth-tabs .nav-link.active {
+  background: var(--md-grad-info);
+  color: #ffffff;
+}
+
 .level-badge {
   display: inline-block;
   padding: 0.25rem 0.65rem;
@@ -162,6 +182,55 @@
   .md-sidebar {
     width: 100%;
     position: static;
+  }
+}
+
+.trend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem 0.05rem 0.25rem;
+  width: fit-content;
+}
+
+.trend-down {
+  color: #2e7d32;
+  background-color: #eaf6ec;
+}
+
+.trend-up {
+  color: #c62828;
+  background-color: #fdecea;
+}
+
+.skeleton {
+  display: block;
+  background: linear-gradient(90deg, #e9ecf1 25%, #dde1e8 37%, #e9ecf1 63%);
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+  border-radius: 0.5rem;
+}
+
+.skeleton-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+}
+
+.skeleton-line {
+  height: 0.875rem;
+  width: 100%;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
   }
 }
 
@@ -187,32 +256,32 @@
 }
 
 .btn-outline-primary {
-  color: #2f5896;
-  border-color: #2f5896;
+  color: #1a73e8;
+  border-color: #1a73e8;
 }
 
 .btn-outline-primary:hover,
 .btn-outline-primary:focus-visible {
-  color: #26456f;
-  border-color: #26456f;
+  color: #1557b0;
+  border-color: #1557b0;
   border-width: 2px;
 }
 
 .btn-outline-secondary {
-  color: #5c7890;
-  border-color: #5c7890;
+  color: #67748e;
+  border-color: #67748e;
 }
 
 .btn-outline-secondary:hover,
 .btn-outline-secondary:focus-visible {
-  color: #43596b;
-  border-color: #43596b;
+  color: #495267;
+  border-color: #495267;
   border-width: 2px;
 }
 
 .btn-primary {
-  background-color: #2f5896;
-  border-color: #2f5896;
+  background-color: #1a73e8;
+  border-color: #1a73e8;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -220,13 +289,13 @@
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-  background-color: #26456f;
-  border-color: #26456f;
+  background-color: #1557b0;
+  border-color: #1557b0;
 }
 
 .btn-secondary {
-  background-color: #a1b6c9;
-  border-color: #a1b6c9;
+  background-color: #8898aa;
+  border-color: #8898aa;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
@@ -234,8 +303,8 @@
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-  background-color: #5c7890;
-  border-color: #5c7890;
+  background-color: #67748e;
+  border-color: #67748e;
 }
 
 .header-bar {
@@ -261,7 +330,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #2f5896;
+  background: var(--md-grad-info);
   color: #ffffff;
   font-size: 0.875rem;
   font-weight: 500;
@@ -358,7 +427,7 @@ h1 {
   font-weight: 700;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
-  color: #2f5896;
+  color: #1a73e8;
   text-shadow: none;
 }
 
@@ -383,7 +452,58 @@ h1 {
 }
 
 .theme-chart-area {
-  min-height: 160px;
+  height: 160px;
+  overflow: hidden;
+}
+
+.distortion-card {
+  user-select: none;
+}
+
+.distortion-thought {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.distortion-swipe-badge {
+  position: absolute;
+  top: 16px;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border: 2px solid currentColor;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+.distortion-swipe-badge-agree {
+  left: 16px;
+  color: #1a73e8;
+  transform: rotate(-8deg);
+}
+
+.distortion-swipe-badge-disagree {
+  right: 16px;
+  color: #dc3545;
+  transform: rotate(8deg);
+}
+
+.distortion-swipe-badge-unsure {
+  bottom: 16px;
+  top: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b8860b;
+}
+
+.theme-card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .theme-card {
@@ -397,7 +517,7 @@ h1 {
 
 .theme-card:hover,
 .theme-card:focus-visible {
-  outline-color: #2f5896;
+  outline-color: #1a73e8;
 }
 
 /* Адаптивность */

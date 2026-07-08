@@ -69,9 +69,11 @@ function SurveyPage() {
   const finish = async (finalAnswers) => {
     try {
       const saved = await saveResult({ themeId: selectedTheme, answers: finalAnswers })
-      navigate('/result', { state: { totalScore: saved.score } })
+      navigate('/result', { state: { totalScore: saved.score, themeId: selectedTheme } })
     } catch {
-      navigate('/result', { state: { totalScore: calculateScore(finalAnswers) } })
+      navigate('/result', {
+        state: { totalScore: calculateScore(finalAnswers), themeId: selectedTheme },
+      })
     }
   }
 
@@ -112,9 +114,12 @@ function SurveyPage() {
       <Layout>
         {themesError && <p className="text-danger text-center text-meta">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
-        <div className="text-center mt-3">
+        <div className="text-center mt-3 d-flex flex-column gap-2 align-items-center">
           <button className="btn btn-outline-secondary" onClick={viewHistory}>
             Просмотр истории
+          </button>
+          <button className="btn btn-outline-primary" onClick={() => navigate('/distortions')}>
+            Игры на когнитивные искажения
           </button>
         </div>
       </Layout>
