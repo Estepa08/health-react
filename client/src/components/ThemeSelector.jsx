@@ -7,13 +7,21 @@ function ThemeSelector({ themes, onSelect }) {
         <Carousel.Item key={theme.id}>
           <div className="d-flex justify-content-center px-5">
             <div
-              className="card"
+              className="card theme-card"
               style={{ width: '320px', height: '480px', cursor: 'pointer' }}
+              role="button"
+              tabIndex={0}
               onClick={() => onSelect(theme.id)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  onSelect(theme.id)
+                }
+              }}
             >
               <img src="/images/theme.jpeg" className="card-img-top" alt={theme.title} />
               <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                <p className="card-text">{theme.description}</p>
+                <p className="card-text card-ink-text">{theme.description}</p>
               </div>
             </div>
           </div>

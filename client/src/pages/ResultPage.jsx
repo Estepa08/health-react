@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { fetchLastResult } from '../api/results'
 import { fetchResultLevels } from '../api/resultLevels'
-import { buttonColors } from '../utils/buttonColors'
 
 function ResultPage() {
   const navigate = useNavigate()
@@ -44,20 +43,16 @@ function ResultPage() {
       <div className="d-flex justify-content-center px-5">
         <div className="card" style={{ width: '320px', height: '480px' }}>
           <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
-            <h1 className="card-title mb-4">{totalScore}</h1>
+            <h1 className="card-title result-score-value mb-4">{totalScore}</h1>
             {level && (
               <>
-                <h5 className="mb-2">
+                <h5 className="card-ink-title result-level-title mb-2">
                   {level.emoji} {level.title}
                 </h5>
-                <p className="mb-4">{level.description}</p>
+                <p className="card-ink-text result-level-description mb-4">{level.description}</p>
               </>
             )}
-            <button
-              className="btn btn-primary"
-              style={{ backgroundColor: buttonColors.primary }}
-              onClick={() => navigate('/survey')}
-            >
+            <button className="btn btn-primary" onClick={() => navigate('/survey')}>
               Пройти заново
             </button>
           </div>

@@ -14,12 +14,18 @@ function Header() {
     navigate('/')
   }
 
+  const initial = user.name?.trim()?.[0]?.toUpperCase() ?? '?'
+
   return (
     <div
-      className="d-flex justify-content-between align-items-start w-100 mb-3 p-3 rounded"
-      style={{ backgroundColor: '#c3c9d1' }}
+      className="d-flex justify-content-between align-items-center w-100 mb-4 p-3 rounded header-bar"
     >
-      <span>{user.name}</span>
+      <div className="d-flex align-items-center gap-2">
+        <span className="header-avatar" aria-hidden="true">
+          {initial}
+        </span>
+        <span>{user.name}</span>
+      </div>
       <button
         type="button"
         className="btn btn-outline-secondary btn-sm"

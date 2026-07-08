@@ -7,7 +7,6 @@ import { fetchThemes } from '../api/themes'
 import { fetchQuestions } from '../api/questions'
 import { calculateScore } from '../utils/calculateScore'
 import { saveResult } from '../api/results'
-import { buttonColors } from '../utils/buttonColors'
 
 function SurveyPage() {
   const navigate = useNavigate()
@@ -111,14 +110,10 @@ function SurveyPage() {
   if (!selectedTheme) {
     return (
       <Layout>
-        {themesError && <p className="text-danger text-center">{themesError}</p>}
+        {themesError && <p className="text-danger text-center text-meta">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
         <div className="text-center mt-3">
-          <button
-            className="btn btn-outline-secondary"
-            style={{ backgroundColor: buttonColors.outlineSecondary }}
-            onClick={viewHistory}
-          >
+          <button className="btn btn-outline-secondary" onClick={viewHistory}>
             Просмотр истории
           </button>
         </div>
@@ -129,7 +124,7 @@ function SurveyPage() {
   if (loadingQuestions) {
     return (
       <Layout>
-        <p className="text-center">Загрузка вопросов...</p>
+        <p className="text-center text-meta">Загрузка вопросов...</p>
       </Layout>
     )
   }
@@ -137,13 +132,9 @@ function SurveyPage() {
   if (questionsError) {
     return (
       <Layout>
-        <p className="text-danger text-center">{questionsError}</p>
+        <p className="text-danger text-center text-meta">{questionsError}</p>
         <div className="text-center">
-          <button
-            className="btn btn-primary"
-            style={{ backgroundColor: buttonColors.primary }}
-            onClick={restart}
-          >
+          <button className="btn btn-primary" onClick={restart}>
             Назад к выбору теста
           </button>
         </div>
@@ -152,15 +143,16 @@ function SurveyPage() {
   }
 
   return (
-    <Layout>
-      {hasStarted && (
-        <div style={{ width: '18rem', margin: '0 auto 1rem auto' }}>
+    <Layout
+      progressBar={
+        <div style={{ visibility: hasStarted ? 'visible' : 'hidden' }}>
           <div className="progress">
             <div className="progress-bar" style={{ width: `${progress}%` }} />
           </div>
-          <p className="text-center mt-2">{Math.round(progress)}%</p>
+          <p className="text-center text-caption mt-2">{Math.round(progress)}%</p>
         </div>
-      )}
+      }
+    >
       <QuestionCard
         questionData={currentQuestion}
         selectedValue={selectedValue}
@@ -174,7 +166,6 @@ function SurveyPage() {
       >
         <button
           className="btn btn-secondary"
-          style={{ backgroundColor: buttonColors.secondary }}
           onClick={goBack}
           disabled={currentIndex === 0 || isAdvancing}
         >
@@ -182,7 +173,6 @@ function SurveyPage() {
         </button>
         <button
           className="btn btn-primary"
-          style={{ backgroundColor: buttonColors.primary }}
           onClick={goNext}
           disabled={selectedValue === undefined || isAdvancing}
         >
