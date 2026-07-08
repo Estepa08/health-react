@@ -8,5 +8,6 @@ npm-debug.log*
 .env.local
 .env.*.local
 
+skills-lock.json
 .claude/skills/
-.agents/skills/skills-lock.json
+.agents/skills/
