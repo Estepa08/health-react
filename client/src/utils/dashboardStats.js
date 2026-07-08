@@ -31,5 +31,23 @@ export function computeStats(results) {
   }
   const favoriteTheme = Array.from(countByTheme.entries()).sort((a, b) => b[1] - a[1])[0][0]
 
-  return { totalAttempts, averageScore, lastAttempt, favoriteTheme }
+  const previousAttempt = results.length > 1 ? results[results.length - 2] : null
+  const scoreDelta = previousAttempt ? lastAttempt.score - previousAttempt.score : null
+
+  const averageBeforeLast =
+    results.length > 1
+      ? Math.round(
+          results.slice(0, -1).reduce((sum, result) => sum + result.score, 0) / (results.length - 1)
+        )
+      : null
+  const averageDelta = averageBeforeLast !== null ? averageScore - averageBeforeLast : null
+
+  return {
+    totalAttempts,
+    averageScore,
+    lastAttempt,
+    favoriteTheme,
+    scoreDelta,
+    averageDelta,
+  }
 }

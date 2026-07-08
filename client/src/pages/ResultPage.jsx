@@ -9,6 +9,7 @@ function ResultPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const [totalScore, setTotalScore] = useState(location.state?.totalScore)
+  const [themeId, setThemeId] = useState(location.state?.themeId)
   const [loading, setLoading] = useState(location.state?.totalScore === undefined)
   const [resultLevels, setResultLevels] = useState([])
 
@@ -16,16 +17,21 @@ function ResultPage() {
     if (location.state?.totalScore !== undefined) return
 
     fetchLastResult()
-      .then((result) => setTotalScore(result?.score))
+      .then((result) => {
+        setTotalScore(result?.score)
+        setThemeId(result?.themeId)
+      })
       .catch(() => setTotalScore(undefined))
       .finally(() => setLoading(false))
   }, [location.state])
 
   useEffect(() => {
-    fetchResultLevels()
+    if (loading) return
+
+    fetchResultLevels(themeId)
       .then(setResultLevels)
       .catch(() => setResultLevels([]))
-  }, [])
+  }, [loading, themeId])
 
   useEffect(() => {
     if (!loading && totalScore === undefined) {
