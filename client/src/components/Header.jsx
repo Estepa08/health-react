@@ -17,9 +17,7 @@ function Header() {
   const initial = user.name?.trim()?.[0]?.toUpperCase() ?? '?'
 
   return (
-    <div
-      className="d-flex justify-content-between align-items-center w-100 mb-4 p-3 rounded header-bar"
-    >
+    <div className="d-flex justify-content-between align-items-center w-100 mb-4 p-3 rounded header-bar">
       <div className="d-flex align-items-center gap-2">
         <span className="header-avatar" aria-hidden="true">
           {initial}
