@@ -1,103 +1,29 @@
-# health-react
+# 🧠 Health Self-Assessment Survey
 
-Приложение для самооценки здоровья: пользователь проходит тематический опросник (тревожность, выгорание, когнитивные функции, депрессия и др.) и получает результат со шкалой оценки.
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Express%205-339933?logo=node.js&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/Postgres-Neon-4169E1?logo=postgresql&logoColor=white)
+![Drizzle ORM](https://img.shields.io/badge/Drizzle-ORM-C5F74F)
+![JWT](https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white)
+![Deploy](https://img.shields.io/badge/Deploy-Vercel%20%2B%20Railway-black?logo=vercel&logoColor=white)
 
-Состоит из двух частей:
+Full-stack pet-проект: пользователь проходит тематический психологический опросник (тревожность, выгорание, когнитивные функции, депрессия) и получает балл с персональной интерпретацией результата.
 
-- `client/` — React 19 + Vite SPA (Bootstrap 5 / react-bootstrap)
-- `server/` — Node.js + Express API, отдаёт вопросы и темы из базы данных Postgres (Neon) через Drizzle ORM
+## ✨ Features
 
-## Требования
+- 🔐 Регистрация/вход с JWT-аутентификацией, хешированием паролей (bcrypt) и защищёнными маршрутами
+- 📋 Пошаговое прохождение опроса с навигацией вперёд/назад и подсветкой ответов
+- 📊 Подсчёт итогового балла и вывод результата по диапазонам
+- 🗄️ REST API на Express + схема БД на Drizzle ORM (Postgres/Neon)
+- ✅ Валидация форм через Formik + Yup
+- 🚀 Настроен деплой: Docker (Railway) для API, SPA-rewrite (Vercel) для клиента
 
-- Node.js 18+
-- npm
-- Доступ к базе данных Postgres (например, бесплатный проект на [Neon](https://neon.tech))
+## 🏗️ Стек
 
-## Установка
-
-Клонируйте репозиторий и установите зависимости отдельно для клиента и сервера:
-
-```bash
-git clone <URL_РЕПОЗИТОРИЯ>
-cd health-react
-
-cd client && npm install
-cd ../server && npm install
-```
-
-## Настройка окружения
-
-### Сервер (`server/.env`)
-
-Создайте файл `server/.env`:
-
-```
-DATABASE_URL=postgresql://<user>:<password>@<host>/<dbname>?sslmode=require
-PORT=3000
-```
-
-`DATABASE_URL` — строка подключения к вашей Postgres-базе (например, из панели Neon).
-
-Примените схему и сиды в базу (SQL-файлы находятся в `server/src/sql/`, применяются по порядку номеров `00_...` → `06_...`) — выполните их через клиент Postgres (`psql` или интерфейс Neon).
-
-### Клиент (`client/.env.local`)
-
-Создайте файл `client/.env.local`:
-
-```
-VITE_API_URL=http://localhost:3000
-```
-
-Укажите адрес, на котором будет доступен сервер (совпадает с `PORT` из `server/.env`).
-
-## Запуск в режиме разработки
-
-Запустите сервер и клиент в отдельных терминалах.
-
-**Сервер:**
-
-```bash
-cd server
-npm run dev
-```
-
-По умолчанию слушает `http://localhost:3000`.
-
-**Клиент:**
-
-```bash
-cd client
-npm run dev
-```
-
-Vite поднимет dev-сервер (обычно `http://localhost:5173`) — откройте адрес из вывода команды в браузере.
-
-Либо через Makefile из корня репозитория — одна команда запустит сервер и клиент вместе:
-
-```bash
-make dev
-```
-
-(`make run` запускает только клиент.)
-
-## Сборка для продакшена
-
-```bash
-cd client
-npm run build
-```
-
-Собранные файлы появятся в `client/dist/`.
-
-## Полезные команды (client/)
-
-```bash
-npm run lint            # проверка ESLint
-npm run format          # форматирование Prettier
-npm run format:check    # проверка форматирования без изменений
-```
-
-## Возможные проблемы
-
-- **`ERR_CONNECTION_REFUSED` на `/api/...` в консоли браузера** — сервер не запущен или запущен не на том порту. Проверьте, что `server` работает (`npm run dev` в `server/`) и что `PORT` в `server/.env` совпадает с `VITE_API_URL` в `client/.env.local`.
-- **Ошибки подключения к базе** — проверьте корректность `DATABASE_URL` в `server/.env` и что база доступна (для Neon — что проект не "уснул").
+| Клиент | Сервер |
+|---|---|
+| React 19, Vite | Express 5 |
+| React Router 7 | Drizzle ORM |
+| react-bootstrap | Neon (serverless Postgres) |
+| Formik + Yup | bcryptjs, jsonwebtoken |
