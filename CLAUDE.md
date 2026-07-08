@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Working conventions
+
+- Communicate with the user in Russian.
+- Before running any shell/bash command, give a very short (few words) explanation of what the command does.
+
 ## Project overview
 
 A health self-assessment survey app ("health-react"): users register/log in, answer a themed questionnaire (anxiety, burnout, cognitive, depression, etc.), and get a scored result. Two halves in this repo, wired together over HTTP:
