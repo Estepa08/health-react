@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import QuestionCard from '../components/QuestionCard'
 import ThemeSelector from '../components/ThemeSelector'
@@ -6,6 +7,7 @@ import { fetchThemes, fetchQuestions } from '../api/client'
 import { calculateScore } from '../utils/calculateScore'
 
 function SurveyPage() {
+  const navigate = useNavigate()
   const [themes, setThemes] = useState([])
   const [themesError, setThemesError] = useState(null)
 
@@ -19,6 +21,12 @@ function SurveyPage() {
   const [hasStarted, setHasStarted] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [totalScore, setTotalScore] = useState(0)
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/', { replace: true })
+    }
+  }, [navigate])
 
   useEffect(() => {
     fetchThemes()

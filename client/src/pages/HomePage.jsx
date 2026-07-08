@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import Layout from '../components/Layout'
+import { login, register } from '../api/client'
 
 const loginSchema = Yup.object({
   email: Yup.string().email('Некорректный email').required('Обязательное поле'),
@@ -20,12 +21,20 @@ const registerSchema = Yup.object({
 
 function HomePage() {
   const [mode, setMode] = useState('login')
+  const [submitError, setSubmitError] = useState(null)
   const navigate = useNavigate()
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    console.log(mode === 'login' ? 'Вход:' : 'Регистрация:', values)
-    setSubmitting(false)
-    navigate('/survey')
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setSubmitError(null)
+    try {
+      const { token } = mode === 'login' ? await login(values) : await register(values)
+      localStorage.setItem('token', token)
+      navigate('/survey')
+    } catch (err) {
+      setSubmitError(err.message)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -53,6 +62,8 @@ function HomePage() {
             </li>
           </ul>
 
+          {submitError && <div className="alert alert-danger">{submitError}</div>}
+
           {mode === 'login' ? (
             <Formik
               initialValues={{ email: '', password: '' }}
@@ -65,14 +76,26 @@ function HomePage() {
                     <label htmlFor="email" className="form-label">
                       Email
                     </label>
-                    <Field type="email" id="email" name="email" className="form-control" />
+                    <Field
+                      autoComplete="off"
+                      type="email"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                    />
                     <ErrorMessage name="email" component="div" className="text-danger small mt-1" />
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">
                       Пароль
                     </label>
-                    <Field type="password" id="password" name="password" className="form-control" />
+                    <Field
+                      autoComplete="off"
+                      type="password"
+                      id="password"
+                      name="password"
+                      className="form-control"
+                    />
                     <ErrorMessage
                       name="password"
                       component="div"
@@ -97,7 +120,13 @@ function HomePage() {
                     <label htmlFor="name" className="form-label">
                       Имя
                     </label>
-                    <Field type="text" id="name" name="name" className="form-control" />
+                    <Field
+                      autoComplete="off"
+                      type="text"
+                      id="name"
+                      name="name"
+                      className="form-control"
+                    />
                     <ErrorMessage name="name" component="div" className="text-danger small mt-1" />
                   </div>
                   <div className="mb-3">
@@ -105,6 +134,7 @@ function HomePage() {
                       Email
                     </label>
                     <Field
+                      autoComplete="off"
                       type="email"
                       id="register-email"
                       name="email"
@@ -117,6 +147,7 @@ function HomePage() {
                       Пароль
                     </label>
                     <Field
+                      autoComplete="off"
                       type="password"
                       id="register-password"
                       name="password"
@@ -133,6 +164,7 @@ function HomePage() {
                       Подтверждение пароля
                     </label>
                     <Field
+                      autoComplete="off"
                       type="password"
                       id="confirmPassword"
                       name="confirmPassword"
