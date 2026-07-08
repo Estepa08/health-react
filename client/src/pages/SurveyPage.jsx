@@ -161,8 +161,8 @@ function SurveyPage() {
         onSelect={handleSelect}
       />
       <div
-        className="d-flex justify-content-between"
-        style={{ width: '18rem', margin: '1rem auto 0 auto' }}
+        className="d-flex justify-content-between mx-auto mt-3"
+        style={{ width: '320px', maxWidth: '100%' }}
       >
         <button
           className="btn btn-secondary"

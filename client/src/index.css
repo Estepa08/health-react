@@ -15,6 +15,18 @@
   padding-top: 10px;
 }
 
+.theme-selector-carousel .carousel-control-prev,
+.theme-selector-carousel .carousel-control-next {
+  width: 15%;
+  min-width: 44px;
+}
+
+.theme-selector-carousel .carousel-control-prev-icon,
+.theme-selector-carousel .carousel-control-next-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
 .btn-outline-primary {
   color: #2f5896;
   border-color: #2f5896;
@@ -104,18 +116,23 @@
     color 0.2s ease;
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   background: linear-gradient(135deg, #e5e7ec 0%, #f3f1f5 100%);
-  min-height: 100vh;
 }
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -215,9 +232,13 @@ h1 {
   #root {
     padding: 1rem;
   }
-  
+
   h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
+  }
+
+  .row {
+    align-items: flex-start;
   }
 }

@@ -40,8 +40,8 @@ function ResultPage() {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center px-5">
-        <div className="card" style={{ width: '320px', height: '480px' }}>
+      <div className="d-flex justify-content-center px-3 px-sm-5">
+        <div className="card" style={{ width: '320px', maxWidth: '100%', height: '480px' }}>
           <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
             <h1 className="card-title result-score-value mb-4">{totalScore}</h1>
             {level && (
