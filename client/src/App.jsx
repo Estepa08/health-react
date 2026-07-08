@@ -47,17 +47,22 @@ function App() {
   }
 
   const currentQuestion = questions[currentIndex]
+  const selectedValue = currentQuestion ? answers[currentQuestion.id] : undefined
 
-  const handleAnswer = (answer) => {
+  const handleSelect = (answer) => {
     if (!hasStarted) setHasStarted(true)
+    setAnswers({ ...answers, [currentQuestion.id]: answer })
+  }
 
-    const newAnswers = { ...answers, [currentQuestion.id]: answer }
-    setAnswers(newAnswers)
+  const goBack = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1)
+  }
 
+  const goNext = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
     } else {
-      setTotalScore(calculateScore(newAnswers))
+      setTotalScore(calculateScore(answers))
       setShowResult(true)
     }
   }
@@ -117,7 +122,19 @@ function App() {
           <p className="text-center mt-2">{Math.round(progress)}%</p>
         </div>
       )}
-      <QuestionCard questionData={currentQuestion} onAnswer={handleAnswer} />
+      <QuestionCard
+        questionData={currentQuestion}
+        selectedValue={selectedValue}
+        onSelect={handleSelect}
+      />
+      <div className="d-flex justify-content-between" style={{ width: '18rem', margin: '1rem auto 0 auto' }}>
+        <button className="btn btn-secondary" onClick={goBack} disabled={currentIndex === 0}>
+          Назад
+        </button>
+        <button className="btn btn-primary" onClick={goNext} disabled={selectedValue === undefined}>
+          {currentIndex < questions.length - 1 ? 'Далее' : 'Завершить'}
+        </button>
+      </div>
     </Layout>
   )
 }

@@ -1,4 +1,4 @@
-function QuestionCard({ questionData, onAnswer }) {
+function QuestionCard({ questionData, selectedValue, onSelect }) {
   if (!questionData) return null
 
   const { prompt, options } = questionData
@@ -12,8 +12,8 @@ function QuestionCard({ questionData, onAnswer }) {
             <button
               key={option.value}
               type="button"
-              className="btn btn-outline-primary"
-              onClick={() => onAnswer(option.value)}
+              className={`btn ${option.value === selectedValue ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => onSelect(option.value)}
             >
               {option.label}
             </button>
