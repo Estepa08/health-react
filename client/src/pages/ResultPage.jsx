@@ -1,21 +1,31 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
-import { getLastResult } from '../utils/resultHistory'
+import { fetchLastResult } from '../api/results'
 import { buttonColors } from '../utils/buttonColors'
 
 function ResultPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const totalScore = location.state?.totalScore ?? getLastResult()?.totalScore
+  const [totalScore, setTotalScore] = useState(location.state?.totalScore)
+  const [loading, setLoading] = useState(location.state?.totalScore === undefined)
 
   useEffect(() => {
-    if (totalScore === undefined) {
+    if (location.state?.totalScore !== undefined) return
+
+    fetchLastResult()
+      .then((result) => setTotalScore(result?.score))
+      .catch(() => setTotalScore(undefined))
+      .finally(() => setLoading(false))
+  }, [location.state])
+
+  useEffect(() => {
+    if (!loading && totalScore === undefined) {
       navigate('/survey', { replace: true })
     }
-  }, [totalScore, navigate])
+  }, [loading, totalScore, navigate])
 
-  if (totalScore === undefined) return null
+  if (loading || totalScore === undefined) return null
 
   return (
     <Layout>

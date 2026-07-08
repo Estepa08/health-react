@@ -33,6 +33,18 @@ export const questions = pgTable(
   (table) => [unique().on(table.themeId, table.questionNumber)]
 )
 
+export const results = pgTable('results', {
+  id: serial('id').primaryKey(),
+  userId: integer('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  themeId: text('theme_id')
+    .notNull()
+    .references(() => themes.id, { onDelete: 'cascade' }),
+  score: integer('score').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+})
+
 export const resultLevels = pgTable('result_levels', {
   id: serial('id').primaryKey(),
   minScore: integer('min_score').notNull(),

@@ -6,7 +6,7 @@ import ThemeSelector from '../components/ThemeSelector'
 import { fetchThemes } from '../api/themes'
 import { fetchQuestions } from '../api/questions'
 import { calculateScore } from '../utils/calculateScore'
-import { saveLastResult } from '../utils/resultHistory'
+import { saveResult } from '../api/results'
 import { buttonColors } from '../utils/buttonColors'
 
 function SurveyPage() {
@@ -70,7 +70,7 @@ function SurveyPage() {
       setCurrentIndex(currentIndex + 1)
     } else {
       const totalScore = calculateScore(answers)
-      saveLastResult({ themeId: selectedTheme, totalScore })
+      saveResult({ themeId: selectedTheme, score: totalScore }).catch(() => {})
       navigate('/result', { state: { totalScore } })
     }
   }
