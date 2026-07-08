@@ -24,14 +24,24 @@ function Header() {
         </span>
         <span>{user.name}</span>
       </div>
-      <button
-        type="button"
-        className="btn btn-outline-secondary btn-sm"
-        style={{ backgroundColor: buttonColors.outlineSecondary }}
-        onClick={handleLogout}
-      >
-        Выход
-      </button>
+      <div className="d-flex align-items-center gap-2">
+        <button
+          type="button"
+          className="btn btn-outline-secondary btn-sm"
+          style={{ backgroundColor: buttonColors.outlineSecondary }}
+          onClick={() => navigate('/dashboard')}
+        >
+          Дашборд
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-secondary btn-sm"
+          style={{ backgroundColor: buttonColors.outlineSecondary }}
+          onClick={handleLogout}
+        >
+          Выход
+        </button>
+      </div>
     </div>
   )
 }

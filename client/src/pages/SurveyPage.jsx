@@ -102,7 +102,7 @@ function SurveyPage() {
   }
 
   const viewHistory = () => {
-    navigate('/result')
+    navigate('/dashboard')
   }
 
   const progress = hasStarted ? (currentIndex / (questions.length - 1)) * 100 : 0

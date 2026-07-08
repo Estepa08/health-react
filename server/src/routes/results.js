@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { desc, eq } from 'drizzle-orm'
+import { asc, desc, eq } from 'drizzle-orm'
 import { db } from '../db/client.js'
-import { results, questions } from '../db/schema.js'
+import { results, questions, themes } from '../db/schema.js'
 import { requireAuth } from '../middleware/auth.js'
 import { calculateScore } from '../utils/calculateScore.js'
 
@@ -42,6 +42,28 @@ resultsRouter.post('/', requireAuth, async (req, res, next) => {
     const [row] = await db.insert(results).values({ userId: req.user.id, themeId, score }).returning()
 
     res.status(201).json(row)
+  } catch (err) {
+    next(err)
+  }
+})
+
+resultsRouter.get('/', requireAuth, async (req, res, next) => {
+  try {
+    const rows = await db
+      .select({
+        id: results.id,
+        themeId: results.themeId,
+        themeTitle: themes.title,
+        themeIcon: themes.icon,
+        score: results.score,
+        createdAt: results.createdAt,
+      })
+      .from(results)
+      .leftJoin(themes, eq(results.themeId, themes.id))
+      .where(eq(results.userId, req.user.id))
+      .orderBy(asc(results.createdAt))
+
+    res.json(rows)
   } catch (err) {
     next(err)
   }

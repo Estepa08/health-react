@@ -15,6 +15,14 @@ export async function saveResult({ themeId, answers }) {
   return res.json()
 }
 
+export async function fetchResults() {
+  const res = await fetch(`${API_URL}/api/results`, {
+    headers: authHeaders(),
+  })
+  if (!res.ok) throw new Error('Не удалось загрузить историю результатов')
+  return res.json()
+}
+
 export async function fetchLastResult() {
   const res = await fetch(`${API_URL}/api/results/last`, {
     headers: authHeaders(),
