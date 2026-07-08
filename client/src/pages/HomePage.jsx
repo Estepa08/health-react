@@ -13,8 +13,9 @@ function HomePage() {
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitError(null)
     try {
-      const { token } = mode === 'login' ? await login(values) : await register(values)
+      const { token, user } = mode === 'login' ? await login(values) : await register(values)
       localStorage.setItem('token', token)
+      localStorage.setItem('user', JSON.stringify(user))
       navigate('/survey')
     } catch (err) {
       setSubmitError(err.message)
