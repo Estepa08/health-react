@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import QuestionCard from '../components/QuestionCard'
@@ -22,12 +22,19 @@ function SurveyPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [hasStarted, setHasStarted] = useState(false)
+  const [confirmedValue, setConfirmedValue] = useState(null)
+  const [isAdvancing, setIsAdvancing] = useState(false)
+  const advanceTimeoutRef = useRef(null)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/', { replace: true })
     }
   }, [navigate])
+
+  useEffect(() => {
+    return () => clearTimeout(advanceTimeoutRef.current)
+  }, [])
 
   useEffect(() => {
     fetchThemes()
@@ -56,23 +63,43 @@ function SurveyPage() {
   const currentQuestion = questions[currentIndex]
   const selectedValue = currentQuestion ? answers[currentQuestion.id] : undefined
 
-  const handleSelect = (answer) => {
-    if (!hasStarted) setHasStarted(true)
-    setAnswers({ ...answers, [currentQuestion.id]: answer })
-  }
-
   const goBack = () => {
     if (currentIndex > 0) setCurrentIndex(currentIndex - 1)
   }
 
-  const goNext = () => {
+  const finish = async (finalAnswers) => {
+    try {
+      const saved = await saveResult({ themeId: selectedTheme, answers: finalAnswers })
+      navigate('/result', { state: { totalScore: saved.score } })
+    } catch {
+      navigate('/result', { state: { totalScore: calculateScore(finalAnswers) } })
+    }
+  }
+
+  const advance = (finalAnswers) => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
     } else {
-      const totalScore = calculateScore(answers)
-      saveResult({ themeId: selectedTheme, score: totalScore }).catch(() => {})
-      navigate('/result', { state: { totalScore } })
+      finish(finalAnswers)
     }
+  }
+
+  const handleSelect = (answer) => {
+    if (isAdvancing) return
+    if (!hasStarted) setHasStarted(true)
+    const nextAnswers = { ...answers, [currentQuestion.id]: answer }
+    setAnswers(nextAnswers)
+    setConfirmedValue(answer)
+    setIsAdvancing(true)
+    advanceTimeoutRef.current = setTimeout(() => {
+      setConfirmedValue(null)
+      setIsAdvancing(false)
+      advance(nextAnswers)
+    }, 1000)
+  }
+
+  const goNext = () => {
+    advance(answers)
   }
 
   const viewHistory = () => {
@@ -137,6 +164,8 @@ function SurveyPage() {
       <QuestionCard
         questionData={currentQuestion}
         selectedValue={selectedValue}
+        confirmedValue={confirmedValue}
+        disabled={isAdvancing}
         onSelect={handleSelect}
       />
       <div
@@ -147,7 +176,7 @@ function SurveyPage() {
           className="btn btn-secondary"
           style={{ backgroundColor: buttonColors.secondary }}
           onClick={goBack}
-          disabled={currentIndex === 0}
+          disabled={currentIndex === 0 || isAdvancing}
         >
           Назад
         </button>
@@ -155,7 +184,7 @@ function SurveyPage() {
           className="btn btn-primary"
           style={{ backgroundColor: buttonColors.primary }}
           onClick={goNext}
-          disabled={selectedValue === undefined}
+          disabled={selectedValue === undefined || isAdvancing}
         >
           {currentIndex < questions.length - 1 ? 'Далее' : 'Завершить'}
         </button>

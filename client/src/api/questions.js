@@ -7,6 +7,6 @@ export async function fetchQuestions(themeId) {
   return rows.map((row) => ({
     id: row.id,
     prompt: row.question,
-    options: row.options.map((label, value) => ({ label, value })),
+    options: row.options.map((option) => ({ label: option.label, value: option.score })),
   }))
 }

@@ -5,11 +5,11 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
-export async function saveResult({ themeId, score }) {
+export async function saveResult({ themeId, answers }) {
   const res = await fetch(`${API_URL}/api/results`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...authHeaders() },
-    body: JSON.stringify({ themeId, score }),
+    body: JSON.stringify({ themeId, answers }),
   })
   if (!res.ok) throw new Error('Не удалось сохранить результат')
   return res.json()

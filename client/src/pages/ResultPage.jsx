@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import { fetchLastResult } from '../api/results'
+import { fetchResultLevels } from '../api/resultLevels'
 import { buttonColors } from '../utils/buttonColors'
 
 function ResultPage() {
@@ -9,6 +10,7 @@ function ResultPage() {
   const location = useLocation()
   const [totalScore, setTotalScore] = useState(location.state?.totalScore)
   const [loading, setLoading] = useState(location.state?.totalScore === undefined)
+  const [resultLevels, setResultLevels] = useState([])
 
   useEffect(() => {
     if (location.state?.totalScore !== undefined) return
@@ -20,6 +22,12 @@ function ResultPage() {
   }, [location.state])
 
   useEffect(() => {
+    fetchResultLevels()
+      .then(setResultLevels)
+      .catch(() => setResultLevels([]))
+  }, [])
+
+  useEffect(() => {
     if (!loading && totalScore === undefined) {
       navigate('/survey', { replace: true })
     }
@@ -27,12 +35,24 @@ function ResultPage() {
 
   if (loading || totalScore === undefined) return null
 
+  const level = resultLevels.find(
+    (item) => totalScore >= item.minScore && totalScore <= item.maxScore
+  )
+
   return (
     <Layout>
       <div className="d-flex justify-content-center px-5">
         <div className="card" style={{ width: '320px', height: '480px' }}>
           <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
             <h1 className="card-title mb-4">{totalScore}</h1>
+            {level && (
+              <>
+                <h5 className="mb-2">
+                  {level.emoji} {level.title}
+                </h5>
+                <p className="mb-4">{level.description}</p>
+              </>
+            )}
             <button
               className="btn btn-primary"
               style={{ backgroundColor: buttonColors.primary }}

@@ -3,6 +3,27 @@
   filter: invert(1) !important;
 }
 
+.btn-outline-primary:hover,
+.btn-outline-primary:focus-visible {
+  color: #0d6efd;
+  border-color: #091a33;
+  border-width: 2px;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus-visible {
+  color: #227ccc;
+  border-color: #1b2b38;
+  border-width: 2px;
+}
+
+.question-option-btn {
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
