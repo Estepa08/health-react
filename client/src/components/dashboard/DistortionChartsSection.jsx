@@ -21,7 +21,7 @@ function DistortionChartsSection({ distortionGameGroups }) {
                         <XAxis dataKey="date" fontSize={12} />
                         <YAxis fontSize={12} allowDecimals={false} domain={[0, 100]} />
                         <Tooltip />
-                        <Line type="monotone" dataKey="score" stroke="#1a73e8" strokeWidth={2} />
+                        <Line type="monotone" dataKey="score" stroke="#3a6d5a" strokeWidth={2} />
                       </LineChart>
                     </ResponsiveContainer>
                   ) : (

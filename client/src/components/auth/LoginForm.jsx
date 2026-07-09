@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { loginSchema } from '../../validation/authSchemas'
-import { buttonColors } from '../../utils/buttonColors'
 
 function LoginForm({ onSubmit }) {
   return (
@@ -40,7 +39,6 @@ function LoginForm({ onSubmit }) {
           <button
             type="submit"
             className="btn btn-primary w-100"
-            style={{ backgroundColor: buttonColors.primary }}
             disabled={isSubmitting}
           >
             Войти

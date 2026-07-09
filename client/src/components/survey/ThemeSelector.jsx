@@ -1,14 +1,21 @@
 import { Carousel } from 'react-bootstrap'
 
+const PLACEHOLDER_IMAGES = [
+  '/images/themes/theme-1.svg',
+  '/images/themes/theme-2.svg',
+  '/images/themes/theme-3.svg',
+  '/images/themes/theme-4.svg',
+]
+
 function ThemeSelector({ themes, onSelect }) {
   return (
     <Carousel interval={null} className="theme-selector-carousel" indicators={false}>
-      {themes.map((theme) => (
+      {themes.map((theme, index) => (
         <Carousel.Item key={theme.id}>
           <div className="d-flex justify-content-center px-3 px-sm-5">
             <div
-              className="card theme-card"
-              style={{ width: '320px', maxWidth: '100%', height: '480px', cursor: 'pointer' }}
+              className="card theme-card survey-card-width"
+              style={{ height: '480px', cursor: 'pointer' }}
               role="button"
               tabIndex={0}
               onClick={() => onSelect(theme.id)}
@@ -19,7 +26,11 @@ function ThemeSelector({ themes, onSelect }) {
                 }
               }}
             >
-              <img src="/images/theme.jpeg" className="card-img-top" alt={theme.title} />
+              <img
+                src={theme.icon || PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length]}
+                className="card-img-top"
+                alt={theme.title}
+              />
               <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
                 <p className="card-text card-ink-text">{theme.description}</p>
               </div>

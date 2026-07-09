@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import Layout from '../components/layout/SurveyLayout'
-import { buttonColors } from '../utils/buttonColors'
 
 function NotFoundPage() {
   const navigate = useNavigate()
@@ -14,7 +13,6 @@ function NotFoundPage() {
             <p className="mb-4">Страница не найдена</p>
             <button
               className="btn btn-primary"
-              style={{ backgroundColor: buttonColors.primary }}
               onClick={() => navigate('/')}
             >
               На главную

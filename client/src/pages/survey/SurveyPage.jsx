@@ -136,42 +136,19 @@ function SurveyPage() {
   }
 
   return (
-    <Layout
-      progressBar={
-        <div style={{ visibility: hasStarted ? 'visible' : 'hidden' }}>
-          <div className="progress">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="text-center text-caption mt-2">{Math.round(progress)}%</p>
-        </div>
-      }
-    >
+    <Layout>
       <QuestionCard
         questionData={currentQuestion}
         selectedValue={selectedValue}
         confirmedValue={confirmedValue}
         disabled={isAdvancing}
         onSelect={handleSelect}
+        onPrev={goBack}
+        onNext={goNext}
+        canGoPrev={currentIndex > 0 && !isAdvancing}
+        canGoNext={selectedValue !== undefined && !isAdvancing}
+        progress={hasStarted ? progress : 0}
       />
-      <div
-        className="d-flex justify-content-between mx-auto mt-3"
-        style={{ width: '320px', maxWidth: '100%' }}
-      >
-        <button
-          className="btn btn-secondary"
-          onClick={goBack}
-          disabled={currentIndex === 0 || isAdvancing}
-        >
-          Назад
-        </button>
-        <button
-          className="btn btn-primary"
-          onClick={goNext}
-          disabled={selectedValue === undefined || isAdvancing}
-        >
-          {currentIndex < questions.length - 1 ? 'Далее' : 'Завершить'}
-        </button>
-      </div>
     </Layout>
   )
 }

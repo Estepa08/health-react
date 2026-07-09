@@ -11,6 +11,15 @@ colors:
   terracotta: "#b3402f"
   ink: "#2a2a28"
   surface: "#f2ead9"
+  option-hover-bg: "#fbe8c0"
+  option-hover-border: "#f0ac4c"
+  option-active-bg: "#f0ac4c"
+  option-active-border: "#e0982f"
+  question-panel-bg: "#d7e8dc"
+  confirm-green: "#4f6b3f"
+  confirm-green-hover: "#3d5330"
+  error-tint-bg: "#f7e6e0"
+  error-tint-ink: "#a53d2a"
 typography:
   headline:
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif"
@@ -76,13 +85,23 @@ A restrained palette: one steady accent, warm-tinted neutrals, and sage for seco
 
 ### Secondary
 - **Mustard** (#d9a319): A single, distinct secondary role — selection outlines and current-state indicators (theme-card hover/focus, the "unsure" swipe badge). Never used for primary actions, so it stays legible as a state signal.
-- **Terracotta** (#b3402f): Reserved for the negative/"disagree" signal on distortion cards, echoing the original screenshot's accent icon color without competing with Teal or Mustard.
+- **Terracotta** (#b3402f): The negative/"disagree"/error signal — distortion-card "disagree" badge, and (as of this pass) every form-validation error and `.alert-danger` across the app, replacing Bootstrap's stock red so "something's wrong" reads in one consistent hue everywhere, not two competing reds.
+- **Confirm Green** (#4f6b3f): A moss-green tuned to the sage/olive family, replacing Bootstrap's stock `btn-success` green. Reserved exclusively for the confirmed survey answer — the one moment the app tells you "got it, saved."
 
 ### Neutral
 - **Sage** (#c7d3c9) / **Cream** (#f2ead9): The body background gradient — a soft green-to-warm wash instead of flat white or cool gray, giving the page a gentle, grounded atmosphere at rest.
 - **Sage Deep** (#33422f): Background for the dashboard sidebar (dark mode of the same hue family, replacing the old navy).
 - **Ink** (#2a2a28): Heading and body text color — warm near-black, keeps headlines calm rather than heavy.
 - **Surface** (#f2ead9): Card backgrounds — warm cream instead of stark white.
+
+### Survey Option States
+A dedicated warm ramp for the answer-option buttons on the question card, distinct from the page-level Mustard accent so hover and active states read as clearly different steps:
+- **Question Panel** (#d7e8dc): Background of the question card itself — a lighter, cooler sage than the page background, so the card visually separates from the page without a hard border.
+- **Option Hover** (#fbe8c0 bg / #f0ac4c border): Unselected option on hover — a soft cream-gold wash signaling "about to select."
+- **Option Active** (#f0ac4c bg / #e0982f border, `--md-option-active-ink` #2a2a28 text): The selected/current answer — solid mustard-gold, unambiguous against the white unselected options.
+
+### Data Visualization
+- **Progress line charts** (dashboard theme/distortion trend charts): Companion Teal (`#3a6d5a`) stroke — reuses the primary accent rather than an off-brand blue, since a trend line is a form of the same "primary action/progress" meaning.
 
 ### Named Rules
 **The One Teal Rule.** Companion Teal is the only accent used for actions (buttons, links, primary focus). Mustard and Terracotta are state signals, not action colors — they never appear on a clickable primary button.
@@ -119,7 +138,7 @@ Gently lifted, not flat. Cards and buttons carry a soft, shallow shadow at rest 
 - **Shape:** Bootstrap default radius (`4px`), consistent across primary, outline, and success states.
 - **Primary:** Solid Companion Teal (`#3a6d5a`) background, white text, `8px 16px` padding (`.btn` default) or full-width (`w-100`) on auth forms.
 - **Outline:** Cream background, Teal border and text; used for unselected survey options so the selected state (solid teal) is unambiguous.
-- **Confirmed/Success:** Bootstrap `btn-success` green, reserved exclusively for a confirmed survey answer — never reused elsewhere, so green stays a single, legible signal.
+- **Confirmed/Success:** Confirm Green (`#4f6b3f`, `.btn-success` override), reserved exclusively for a confirmed survey answer — never reused elsewhere, so green stays a single, legible signal in the same warm-earthy family as the rest of the palette rather than Bootstrap's stock green.
 - **Hover / Focus:** Background/border/color transition over `0.2s ease` (`.question-option-btn`); outline buttons darken border and get `2px` width on hover/focus-visible for a clear, non-jumpy focus state.
 
 ### Cards
@@ -132,7 +151,7 @@ Gently lifted, not flat. Cards and buttons carry a soft, shallow shadow at rest 
 ### Inputs / Fields
 - **Style:** Bootstrap default form-control (light border, white background, `4px` radius).
 - **Focus:** Teal focus ring — consistent with Companion Teal as the primary accent.
-- **Error:** Formik/Yup validation messages in Bootstrap's default danger red, shown inline below the field.
+- **Error:** Formik/Yup validation messages and `.alert-danger` banners in Terracotta (`#b3402f` text, `#f7e6e0`/`#a53d2a` tint for banners) instead of Bootstrap's default danger red — keeps the app's one "negative" signal consistent between form errors and the distortion-card "disagree" state.
 
 ### Navigation
 - **Style:** No persistent top nav; a single header bar (`#c7d3c9` sage background, `8px` radius, `16px` padding) shows the logged-in user's name and a small outline-secondary logout button, only when authenticated.
@@ -145,7 +164,7 @@ Gently lifted, not flat. Cards and buttons carry a soft, shallow shadow at rest 
 - **Do** use Mustard (`#d9a319`) only for selection/current-state outlines, never for buttons or links.
 - **Do** use soft, diffuse shadows (`rgba(0,0,0,0.1–0.2)`, large blur) for all elevation — never a hard, sharp shadow.
 - **Do** keep one question / one card on screen at a time; resist adding secondary content that competes with the current prompt.
-- **Do** reserve green (`btn-success`) exclusively for confirmed survey answers.
+- **Do** reserve Confirm Green (`#4f6b3f`, `btn-success`) exclusively for confirmed survey answers, and Terracotta for every error/negative signal (form validation, alerts, "disagree") so each state has exactly one color.
 - **Do** keep body copy warm and plain — short sentences, no clinical jargon, no diagnostic language.
 
 ### Don't:

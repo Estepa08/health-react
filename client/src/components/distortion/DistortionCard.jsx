@@ -52,17 +52,18 @@ function DistortionCard({ thought, onSwipe, disabled }) {
   }
 
   const rotation = Math.max(-20, Math.min(20, offset.x / 12))
-  const disagreeOpacity = Math.min(1, Math.max(0, offset.x) / SWIPE_THRESHOLD_X)
-  const agreeOpacity = Math.min(1, Math.max(0, -offset.x) / SWIPE_THRESHOLD_X)
-  const unsureOpacity = Math.min(1, Math.max(0, offset.y) / SWIPE_THRESHOLD_Y)
+  // Ramp badges up over ~60% of the trigger distance so they're clearly
+  // visible well before the swipe actually fires, not just at the last moment.
+  const disagreeRatio = Math.min(1, Math.max(0, offset.x) / (SWIPE_THRESHOLD_X * 0.6))
+  const agreeRatio = Math.min(1, Math.max(0, -offset.x) / (SWIPE_THRESHOLD_X * 0.6))
+  const unsureRatio = Math.min(1, Math.max(0, offset.y) / (SWIPE_THRESHOLD_Y * 0.6))
+  const badgeScale = (ratio) => 0.7 + ratio * 0.4
 
   return (
     <div className="d-flex flex-column align-items-center px-3 px-sm-5">
       <div
-        className="card distortion-card"
+        className="card distortion-card survey-card-width"
         style={{
-          width: '320px',
-          maxWidth: '100%',
           height: '420px',
           touchAction: 'none',
           cursor: isDragging ? 'grabbing' : 'grab',
@@ -77,53 +78,68 @@ function DistortionCard({ thought, onSwipe, disabled }) {
         <div className="card-body d-flex flex-column justify-content-center align-items-center text-center position-relative">
           <span
             className="distortion-swipe-badge distortion-swipe-badge-agree"
-            style={{ opacity: agreeOpacity }}
+            style={{
+              opacity: agreeRatio,
+              transform: `rotate(-8deg) scale(${badgeScale(agreeRatio)})`,
+            }}
           >
-            Согласен
+            ✓ Согласен
           </span>
           <span
             className="distortion-swipe-badge distortion-swipe-badge-disagree"
-            style={{ opacity: disagreeOpacity }}
+            style={{
+              opacity: disagreeRatio,
+              transform: `rotate(8deg) scale(${badgeScale(disagreeRatio)})`,
+            }}
           >
-            Не согласен
+            ✕ Не согласен
           </span>
           <span
             className="distortion-swipe-badge distortion-swipe-badge-unsure"
-            style={{ opacity: unsureOpacity }}
+            style={{
+              opacity: unsureRatio,
+              transform: `translateX(-50%) scale(${badgeScale(unsureRatio)})`,
+            }}
           >
-            Не уверен
+            ? Не уверен
           </span>
           <p className="card-ink-title distortion-thought mb-0">{thought}</p>
         </div>
       </div>
 
-      <div
-        className="d-flex justify-content-between mt-3"
-        style={{ width: '320px', maxWidth: '100%' }}
-      >
+      <div className="d-flex justify-content-between mt-3 survey-card-width">
         <button
           type="button"
-          className="btn btn-outline-secondary"
+          className="distortion-action-btn distortion-action-disagree"
           disabled={disabled}
           onClick={() => triggerSwipe('right')}
         >
-          Не согласен
+          <span className="distortion-action-icon" aria-hidden="true">
+            ✕
+          </span>
+          <span className="distortion-action-label">Не согласен</span>
         </button>
         <button
           type="button"
-          className="btn btn-outline-warning"
+          className="distortion-action-btn distortion-action-unsure"
           disabled={disabled}
           onClick={() => triggerSwipe('down')}
         >
-          Не уверен
+          <span className="distortion-action-icon" aria-hidden="true">
+            ?
+          </span>
+          <span className="distortion-action-label">Не уверен</span>
         </button>
         <button
           type="button"
-          className="btn btn-outline-primary"
+          className="distortion-action-btn distortion-action-agree"
           disabled={disabled}
           onClick={() => triggerSwipe('left')}
         >
-          Согласен
+          <span className="distortion-action-icon" aria-hidden="true">
+            ✓
+          </span>
+          <span className="distortion-action-label">Согласен</span>
         </button>
       </div>
     </div>
