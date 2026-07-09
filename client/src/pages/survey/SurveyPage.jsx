@@ -136,7 +136,16 @@ function SurveyPage() {
   }
 
   return (
-    <Layout>
+    <Layout
+      progressBar={
+        <div style={{ visibility: hasStarted ? 'visible' : 'hidden' }}>
+          <div className="progress">
+            <div className="progress-bar" style={{ width: `${progress}%` }} />
+          </div>
+          <p className="text-center text-caption mt-2">{Math.round(progress)}%</p>
+        </div>
+      }
+    >
       <QuestionCard
         questionData={currentQuestion}
         selectedValue={selectedValue}
@@ -147,7 +156,6 @@ function SurveyPage() {
         onNext={goNext}
         canGoPrev={currentIndex > 0 && !isAdvancing}
         canGoNext={selectedValue !== undefined && !isAdvancing}
-        progress={hasStarted ? progress : 0}
       />
     </Layout>
   )
