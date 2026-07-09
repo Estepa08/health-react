@@ -16,7 +16,7 @@ function SurveyPage() {
   const [selectedTheme, setSelectedTheme] = useState(null)
   const [questions, setQuestions] = useState([])
   const [questionsError, setQuestionsError] = useState(null)
-  const [loadingQuestions, setLoadingQuestions] = useState(false)
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false)
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
@@ -43,12 +43,12 @@ function SurveyPage() {
 
   const selectTheme = (themeId) => {
     setSelectedTheme(themeId)
-    setLoadingQuestions(true)
+    setIsLoadingQuestions(true)
     setQuestionsError(null)
     fetchQuestions(themeId)
       .then((data) => setQuestions(data))
       .catch((err) => setQuestionsError(err.message))
-      .finally(() => setLoadingQuestions(false))
+      .finally(() => setIsLoadingQuestions(false))
   }
 
   const restart = () => {
@@ -114,7 +114,7 @@ function SurveyPage() {
     )
   }
 
-  if (loadingQuestions) {
+  if (isLoadingQuestions) {
     return (
       <Layout>
         <p className="text-center text-meta">Загрузка вопросов...</p>

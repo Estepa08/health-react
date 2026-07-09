@@ -23,6 +23,12 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run format:check
+      - run: npm run test:coverage
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: client/coverage/lcov.info
+          flags: client
       - run: npm run build
 
   server:

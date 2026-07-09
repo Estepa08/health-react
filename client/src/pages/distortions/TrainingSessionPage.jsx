@@ -9,12 +9,12 @@ function TrainingSessionPage() {
   const { slug } = useParams()
 
   const [situations, setSituations] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answers, setAnswers] = useState({})
   const [isAdvancing, setIsAdvancing] = useState(false)
-  const [saving, setSaving] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
   const advanceTimeoutRef = useRef(null)
 
   useEffect(() => {
@@ -31,11 +31,11 @@ function TrainingSessionPage() {
     fetchDistortionSituations(slug)
       .then(setSituations)
       .catch((err) => setError(err.message))
-      .finally(() => setLoading(false))
+      .finally(() => setIsLoading(false))
   }, [slug])
 
   const finish = async (finalAnswers) => {
-    setSaving(true)
+    setIsSaving(true)
     try {
       const attempt = await saveDistortionTrainingAttempt({
         distortionSlug: slug,
@@ -44,7 +44,7 @@ function TrainingSessionPage() {
       navigate(`/training/${slug}/result`, { state: { attempt } })
     } catch (err) {
       setError(err.message)
-      setSaving(false)
+      setIsSaving(false)
     }
   }
 
@@ -66,7 +66,7 @@ function TrainingSessionPage() {
 
   const progress = situations.length > 0 ? (currentIndex / situations.length) * 100 : 0
 
-  if (loading) {
+  if (isLoading) {
     return (
       <Layout>
         <p className="text-center text-meta">Загрузка ситуаций...</p>
@@ -107,7 +107,7 @@ function TrainingSessionPage() {
           key={currentSituation.id}
           situation={currentSituation}
           selectedOptionId={answers[currentSituation.id]}
-          disabled={isAdvancing || saving}
+          disabled={isAdvancing || isSaving}
           onSelect={handleSelect}
         />
       )}
