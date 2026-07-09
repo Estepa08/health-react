@@ -2,6 +2,16 @@ export function formatDate(isoString) {
   return new Date(isoString).toLocaleDateString('ru-RU', { day: '2-digit', month: 'short' })
 }
 
+export function groupResultsByDate(results) {
+  const byDate = new Map()
+  for (const result of results) {
+    const dateKey = new Date(result.createdAt).toLocaleDateString('sv-SE')
+    if (!byDate.has(dateKey)) byDate.set(dateKey, [])
+    byDate.get(dateKey).push(result)
+  }
+  return byDate
+}
+
 export function groupByTheme(results) {
   const byTheme = new Map()
   for (const result of results) {
