@@ -15,7 +15,13 @@ function LoginForm({ onSubmit }) {
             <label htmlFor="email" className="form-label">
               Email
             </label>
-            <Field autoComplete="off" type="email" id="email" name="email" className="form-control" />
+            <Field
+              autoComplete="off"
+              type="email"
+              id="email"
+              name="email"
+              className="form-control"
+            />
             <ErrorMessage name="email" component="div" className="text-danger small mt-1" />
           </div>
           <div className="mb-3">

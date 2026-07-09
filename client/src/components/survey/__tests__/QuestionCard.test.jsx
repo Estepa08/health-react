@@ -43,7 +43,7 @@ describe('QuestionCard', () => {
         selectedValue={1}
         confirmedValue={2}
         onSelect={() => {}}
-      />,
+      />
     )
 
     expect(screen.getByRole('button', { name: 'Иногда' })).toHaveClass('btn-primary')

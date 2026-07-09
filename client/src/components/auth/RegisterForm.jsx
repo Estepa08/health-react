@@ -55,7 +55,11 @@ function RegisterForm({ onSubmit }) {
               name="confirmPassword"
               className="form-control"
             />
-            <ErrorMessage name="confirmPassword" component="div" className="text-danger small mt-1" />
+            <ErrorMessage
+              name="confirmPassword"
+              component="div"
+              className="text-danger small mt-1"
+            />
           </div>
           <button
             type="submit"
