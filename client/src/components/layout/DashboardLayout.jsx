@@ -1,4 +1,4 @@
-import Sidebar from './Sidebar'
+import DashboardSidebar from './DashboardSidebar'
 
 function DashboardLayout({ children }) {
   const rawUser = localStorage.getItem('user')
@@ -6,7 +6,7 @@ function DashboardLayout({ children }) {
 
   return (
     <div className="md-shell">
-      <Sidebar active="dashboard" />
+      <DashboardSidebar active="dashboard" />
       <div className="md-content">
         <div className="md-topbar d-flex justify-content-between align-items-center">
           <h5 className="mb-0">Дашборд</h5>

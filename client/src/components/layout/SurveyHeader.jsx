@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { buttonColors } from '../utils/buttonColors'
+import { buttonColors } from '../../utils/buttonColors'
 
 function Header() {
   const navigate = useNavigate()

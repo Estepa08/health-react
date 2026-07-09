@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import Layout from '../components/Layout'
-import DistortionCard from '../components/DistortionCard'
-import { fetchDistortionCards } from '../api/distortionGames'
-import { saveDistortionAttempt } from '../api/distortionAttempts'
+import Layout from '../../components/layout/SurveyLayout'
+import DistortionCard from '../../components/distortion/DistortionCard'
+import { fetchDistortionCards } from '../../api/distortionGames'
+import { saveDistortionAttempt } from '../../api/distortionAttempts'
 
 function DistortionGamePage() {
   const navigate = useNavigate()
