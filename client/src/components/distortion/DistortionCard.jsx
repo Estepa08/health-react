@@ -6,25 +6,25 @@ const EXIT_DISTANCE = 500
 
 function DistortionCard({ thought, onSwipe, disabled }) {
   const [offset, setOffset] = useState({ x: 0, y: 0 })
-  const [dragging, setDragging] = useState(false)
-  const [exiting, setExiting] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [isExiting, setIsExiting] = useState(null)
   const startRef = useRef(null)
 
   const handlePointerDown = (e) => {
-    if (disabled || exiting) return
-    setDragging(true)
+    if (disabled || isExiting) return
+    setIsDragging(true)
     startRef.current = { x: e.clientX, y: e.clientY }
     e.currentTarget.setPointerCapture(e.pointerId)
   }
 
   const handlePointerMove = (e) => {
-    if (!dragging || !startRef.current) return
+    if (!isDragging || !startRef.current) return
     setOffset({ x: e.clientX - startRef.current.x, y: e.clientY - startRef.current.y })
   }
 
   const finishDrag = () => {
-    if (!dragging) return
-    setDragging(false)
+    if (!isDragging) return
+    setIsDragging(false)
 
     const { x, y } = offset
     const absX = Math.abs(x)
@@ -40,7 +40,7 @@ function DistortionCard({ thought, onSwipe, disabled }) {
 
   const triggerSwipe = (direction) => {
     if (disabled) return
-    setExiting(direction)
+    setIsExiting(direction)
     const exitOffset =
       direction === 'left'
         ? { x: -EXIT_DISTANCE, y: -40 }
@@ -65,9 +65,9 @@ function DistortionCard({ thought, onSwipe, disabled }) {
           maxWidth: '100%',
           height: '420px',
           touchAction: 'none',
-          cursor: dragging ? 'grabbing' : 'grab',
+          cursor: isDragging ? 'grabbing' : 'grab',
           transform: `translate(${offset.x}px, ${offset.y}px) rotate(${rotation}deg)`,
-          transition: dragging ? 'none' : 'transform 220ms ease',
+          transition: isDragging ? 'none' : 'transform 220ms ease',
         }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}

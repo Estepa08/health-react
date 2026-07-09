@@ -26,6 +26,8 @@ npm run build           # production build
 npm run lint             # eslint .
 npm run format          # prettier --write on src/**/*.{js,jsx,json,css}
 npm run format:check
+npm run test             # vitest (watch mode)
+npm run test:coverage   # vitest run --coverage (v8 provider, text + lcov reporters)
 ```
 
 Server (from `server/`):
@@ -34,9 +36,26 @@ Server (from `server/`):
 npm run dev       # node --watch src/index.js
 npm start         # node src/index.js
 npm run db:push   # drizzle-kit push — sync schema.js to the Neon database
+npm test          # vitest (watch mode)
 ```
 
-There is no test runner configured in either `client/` or `server/`.
+Both use Vitest as the test runner. From the repo root, `Makefile` wraps the above:
+
+```
+make test            # runs client + server tests (vitest run)
+make test-client      # client tests only
+make test-server      # server tests only
+make test-coverage   # client coverage report
+```
+
+## Testing conventions
+
+- Test runner: **Vitest** in both `client/` and `server/` (`client/vite.config.js` / `server/vitest.config.js`).
+- Client tests use `jsdom` environment, `@testing-library/react` + `@testing-library/user-event` for component tests, `@testing-library/jest-dom` matchers (loaded via `src/setupTests.js`), and Vitest globals (`describe`/`it`/`expect`/`vi` — no explicit imports needed, enabled via `test.globals: true`).
+- Server tests use the default `node` environment; no DOM tooling.
+- Test files live in a `__tests__/` folder next to the code they cover (e.g. `src/utils/__tests__/calculateScore.test.js`, `src/components/survey/__tests__/QuestionCard.test.jsx`), not co-located as `Component.test.jsx` siblings.
+- ESLint config (`client/eslint.config.js`) has a dedicated block for `**/__tests__/**/*.{js,jsx}` (and `src/setupTests.js`) that adds the Vitest globals; `coverage/` is excluded from lint via `globalIgnores`.
+- Coverage: `@vitest/coverage-v8` on the client, reporters `text` + `lcov`; CI uploads `client/coverage/lcov.info` to Codecov (flag `client`) — requires a `CODECOV_TOKEN` repo secret.
 
 ## Architecture notes
 
