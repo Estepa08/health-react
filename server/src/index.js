@@ -13,8 +13,18 @@ import { errorHandler } from './middleware/errorHandler.js'
 const app = express()
 const PORT = process.env.PORT || 3000
 
+const allowedOrigins = (
+  process.env.CORS_ORIGIN || 'http://localhost:5173,https://health-react-xsrb.vercel.app'
+)
+  .split(',')
+  .map((origin) => origin.trim())
+
 app.disable('x-powered-by')
-app.use(cors())
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+)
 app.use(express.json())
 
 app.use('/api/themes', themesRouter)
