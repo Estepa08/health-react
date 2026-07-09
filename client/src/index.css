@@ -650,7 +650,13 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family:
+    'Montserrat',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    sans-serif;
   background: var(--color-bg-app);
 }
 
@@ -672,7 +678,13 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Reef', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family:
+    'Reef',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'Roboto',
+    sans-serif;
 }
 
 /* Стили для заголовка */

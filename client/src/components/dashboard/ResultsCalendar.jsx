@@ -72,7 +72,8 @@ function ResultsCalendar({ results, resultLevels }) {
 
         <div className="calendar-grid">
           {cells.map((date, index) => {
-            if (!date) return <div key={`blank-${index}`} className="calendar-day calendar-day-empty" />
+            if (!date)
+              return <div key={`blank-${index}`} className="calendar-day calendar-day-empty" />
 
             const dateKey = date.toLocaleDateString('sv-SE')
             const dayResults = resultsByDate.get(dateKey) ?? []

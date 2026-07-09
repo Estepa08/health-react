@@ -31,11 +31,7 @@ function Header() {
         >
           Статистика
         </button>
-        <button
-          type="button"
-          className="btn btn-outline-secondary btn-sm"
-          onClick={handleLogout}
-        >
+        <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleLogout}>
           Выход
         </button>
       </div>

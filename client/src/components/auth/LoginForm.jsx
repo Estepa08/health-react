@@ -36,11 +36,7 @@ function LoginForm({ onSubmit }) {
             />
             <ErrorMessage name="password" component="div" className="text-danger small mt-1" />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-100"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting}>
             Войти
           </button>
         </Form>

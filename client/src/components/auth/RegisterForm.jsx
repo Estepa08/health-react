@@ -60,11 +60,7 @@ function RegisterForm({ onSubmit }) {
               className="text-danger small mt-1"
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-100"
-            disabled={isSubmitting}
-          >
+          <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting}>
             Зарегистрироваться
           </button>
         </Form>
