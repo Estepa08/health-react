@@ -15,7 +15,7 @@ export async function fetchDistortionTypes() {
 
 export async function fetchDistortionSituations(slug) {
   const res = await fetch(
-    `${API_URL}/api/distortion-training/situations?slug=${assertSafeUrlSegment(slug)}`,
+    `${API_URL}/api/distortion-training/situations?slug=${assertSafeUrlSegment(slug)}`
   )
   if (!res.ok) throw new Error('Не удалось загрузить ситуации')
   return res.json()
