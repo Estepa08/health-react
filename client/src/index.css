@@ -652,25 +652,6 @@ h1 {
   padding: 1.5rem 1.25rem;
 }
 
-.tree-progress {
-  width: 130px;
-  height: 320px;
-  flex-shrink: 0;
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .tree-progress {
-    display: block;
-  }
-}
-
-.tree-progress > div,
-.tree-progress canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
 .question-prompt-wrap {
   position: relative;
   flex: 1;
@@ -820,6 +801,8 @@ h1 {
 }
 
 .theme-chart-area {
+  width: 100%;
+  min-width: 0;
   height: 160px;
   overflow: hidden;
 }
@@ -867,8 +850,7 @@ h1 {
 }
 
 .distortion-swipe-badge-unsure {
-  bottom: 16px;
-  top: auto;
+  top: 16px;
   left: 50%;
   color: #ffffff;
   background-color: #c9930f;

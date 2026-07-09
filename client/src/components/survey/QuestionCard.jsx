@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import TreeProgress from './TreeProgress'
 
 function QuestionCard({
   questionData,
@@ -11,7 +10,6 @@ function QuestionCard({
   onNext,
   canGoPrev,
   canGoNext,
-  progress,
 }) {
   const [exitingPrompt, setExitingPrompt] = useState(null)
   const prevDataRef = useRef(questionData)
@@ -35,7 +33,6 @@ function QuestionCard({
 
   return (
     <div className="d-flex justify-content-center align-items-start gap-3 px-3 px-sm-5">
-      {progress != null && <TreeProgress progress={progress} />}
       <div className="question-panel survey-card-width">
         <div className="d-flex align-items-center justify-content-between w-100 mb-3 question-nav">
           <button
