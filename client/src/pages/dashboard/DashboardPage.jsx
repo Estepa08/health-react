@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import DashboardLayout from '../../components/layout/DashboardLayout'
 import DashboardSkeleton from '../../components/dashboard/DashboardSkeleton'
 import StatCardsSection from '../../components/dashboard/StatCardsSection'
+import ResultsCalendar from '../../components/dashboard/ResultsCalendar'
 import ThemeChartsSection from '../../components/dashboard/ThemeChartsSection'
 import DistortionChartsSection from '../../components/dashboard/DistortionChartsSection'
 import HistoryTable from '../../components/dashboard/HistoryTable'
@@ -64,6 +65,7 @@ function DashboardPage() {
   return (
     <DashboardLayout>
       <StatCardsSection statValues={statValues} statTrends={statTrends} />
+      <ResultsCalendar results={results} resultLevels={resultLevels} />
       <ThemeChartsSection themeGroups={themeGroups} />
       <DistortionChartsSection distortionGameGroups={distortionGameGroups} />
       <HistoryTable historyRows={historyRows} resultLevels={resultLevels} />
