@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { buttonColors } from '../../utils/buttonColors'
 
 function Header() {
   const navigate = useNavigate()
@@ -28,7 +27,6 @@ function Header() {
         <button
           type="button"
           className="btn btn-outline-secondary btn-sm"
-          style={{ backgroundColor: buttonColors.outlineSecondary }}
           onClick={() => navigate('/dashboard')}
         >
           Статистика
@@ -36,7 +34,6 @@ function Header() {
         <button
           type="button"
           className="btn btn-outline-secondary btn-sm"
-          style={{ backgroundColor: buttonColors.outlineSecondary }}
           onClick={handleLogout}
         >
           Выход

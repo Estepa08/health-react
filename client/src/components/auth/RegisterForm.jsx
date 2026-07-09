@@ -1,6 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { registerSchema } from '../../validation/authSchemas'
-import { buttonColors } from '../../utils/buttonColors'
 
 function RegisterForm({ onSubmit }) {
   return (
@@ -64,7 +63,6 @@ function RegisterForm({ onSubmit }) {
           <button
             type="submit"
             className="btn btn-primary w-100"
-            style={{ backgroundColor: buttonColors.primary }}
             disabled={isSubmitting}
           >
             Зарегистрироваться

@@ -3,7 +3,7 @@ function SituationCard({ situation, selectedOptionId, disabled, onSelect }) {
 
   return (
     <div className="d-flex justify-content-center px-3 px-sm-5">
-      <div className="card" style={{ width: '320px', maxWidth: '100%', minHeight: '480px' }}>
+      <div className="card survey-card-width" style={{ minHeight: '480px' }}>
         <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
           <p className="card-ink-title mb-4">{situation.situationText}</p>
           <div className="d-grid gap-2 w-100">

@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Layout from '../../components/layout/SurveyLayout'
 import DistortionCard from '../../components/distortion/DistortionCard'
+import DistortionOnboarding from '../../components/distortion/DistortionOnboarding'
 import { fetchDistortionCards } from '../../api/distortionGames'
 import { saveDistortionAttempt } from '../../api/distortionAttempts'
+
+const ONBOARDING_STORAGE_KEY = 'distortionSwipeOnboardingSeen'
 
 function DistortionGamePage() {
   const navigate = useNavigate()
@@ -15,6 +18,14 @@ function DistortionGamePage() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [swipes, setSwipes] = useState({})
   const [saving, setSaving] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !localStorage.getItem(ONBOARDING_STORAGE_KEY)
+  )
+
+  const handleOnboardingStart = () => {
+    localStorage.setItem(ONBOARDING_STORAGE_KEY, '1')
+    setShowOnboarding(false)
+  }
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -71,6 +82,14 @@ function DistortionGamePage() {
             Назад к списку игр
           </button>
         </div>
+      </Layout>
+    )
+  }
+
+  if (showOnboarding) {
+    return (
+      <Layout>
+        <DistortionOnboarding onStart={handleOnboardingStart} />
       </Layout>
     )
   }
