@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { randomInt } from 'node:crypto'
 import { asc, desc, eq, inArray } from 'drizzle-orm'
 import { db } from '../db/client.js'
 import {
@@ -16,7 +17,7 @@ const SITUATIONS_PER_SESSION = 10
 function shuffle(array) {
   const result = [...array]
   for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
+    const j = randomInt(i + 1)
     ;[result[i], result[j]] = [result[j], result[i]]
   }
   return result
