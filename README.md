@@ -7,7 +7,8 @@
 ![Drizzle ORM](https://img.shields.io/badge/Drizzle-ORM-C5F74F)
 ![JWT](https://img.shields.io/badge/Auth-JWT-000000?logo=jsonwebtokens&logoColor=white)
 ![Deploy](https://img.shields.io/badge/Deploy-Vercel%20%2B%20Railway-black?logo=vercel&logoColor=white)
-[![codecov](https://codecov.io/gh/Estepa08/health-react/graph/badge.svg?flag=client)](https://codecov.io/gh/Estepa08/health-react)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Estepa08_health-react&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Estepa08_health-react)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Estepa08_health-react&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Estepa08_health-react)
 
 **[English](#english) | [Русский](#русский)**
 
