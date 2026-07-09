@@ -1,9 +1,17 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
+function stripUnsafeChars(value) {
+  return String(value ?? '').replace(/[<>]/g, '')
+}
+
 export function sanitizeUser(user) {
   if (!user || typeof user !== 'object') return null
   const { id, name, email } = user
-  return { id, name: String(name ?? ''), email: String(email ?? '') }
+  return {
+    id: Number.isFinite(id) ? id : null,
+    name: stripUnsafeChars(name),
+    email: stripUnsafeChars(email),
+  }
 }
 
 export async function register({ name, email, password }) {
