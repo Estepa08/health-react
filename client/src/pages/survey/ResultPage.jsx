@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Layout from '../components/Layout'
-import { fetchLastResult } from '../api/results'
-import { fetchResultLevels } from '../api/resultLevels'
-import { findResultLevel } from '../utils/findResultLevel'
+import Layout from '../../components/layout/SurveyLayout'
+import { fetchLastResult } from '../../api/results'
+import { fetchResultLevels } from '../../api/resultLevels'
+import { findResultLevel } from '../../utils/findResultLevel'
 
 function ResultPage() {
   const navigate = useNavigate()

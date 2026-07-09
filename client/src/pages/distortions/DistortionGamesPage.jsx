@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Layout from '../components/Layout'
-import { fetchDistortionGames } from '../api/distortionGames'
-import { fetchDistortionAttempts } from '../api/distortionAttempts'
-import { summarizeByGame } from '../utils/distortionStats'
-import { formatDate } from '../utils/dashboardStats'
+import Layout from '../../components/layout/SurveyLayout'
+import { fetchDistortionGames } from '../../api/distortionGames'
+import { fetchDistortionAttempts } from '../../api/distortionAttempts'
+import { summarizeByGame } from '../../utils/distortionStats'
+import { formatDate } from '../../utils/dashboardStats'
 
 function DistortionGamesPage() {
   const navigate = useNavigate()

@@ -1,9 +1,9 @@
-import Header from './Header'
+import SurveyHeader from './SurveyHeader'
 
 function Layout({ children, progressBar }) {
   return (
     <>
-      <Header />
+      <SurveyHeader />
       <div className="d-flex justify-content-center survey-progress-bar">
         <div style={{ width: '320px', maxWidth: '100%' }}>{progressBar}</div>
       </div>

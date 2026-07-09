@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Layout from '../components/Layout'
-import QuestionCard from '../components/QuestionCard'
-import ThemeSelector from '../components/ThemeSelector'
-import { fetchThemes } from '../api/themes'
-import { fetchQuestions } from '../api/questions'
-import { calculateScore } from '../utils/calculateScore'
-import { saveResult } from '../api/results'
+import Layout from '../../components/layout/SurveyLayout'
+import QuestionCard from '../../components/survey/QuestionCard'
+import ThemeSelector from '../../components/survey/ThemeSelector'
+import { fetchThemes } from '../../api/themes'
+import { fetchQuestions } from '../../api/questions'
+import { calculateScore } from '../../utils/calculateScore'
+import { saveResult } from '../../api/results'
 
 function SurveyPage() {
   const navigate = useNavigate()

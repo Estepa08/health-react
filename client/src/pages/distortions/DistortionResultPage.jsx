@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
-import Layout from '../components/Layout'
+import Layout from '../../components/layout/SurveyLayout'
 
 function DistortionResultPage() {
   const navigate = useNavigate()
