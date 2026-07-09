@@ -7,6 +7,9 @@ import DashboardPage from './pages/dashboard/DashboardPage'
 import DistortionGamesPage from './pages/distortions/DistortionGamesPage'
 import DistortionGamePage from './pages/distortions/DistortionGamePage'
 import DistortionResultPage from './pages/distortions/DistortionResultPage'
+import TrainingTypesPage from './pages/distortions/TrainingTypesPage'
+import TrainingSessionPage from './pages/distortions/TrainingSessionPage'
+import TrainingResultPage from './pages/distortions/TrainingResultPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
       <Route path="/distortions" element={<DistortionGamesPage />} />
       <Route path="/distortions/:gameId" element={<DistortionGamePage />} />
       <Route path="/distortions/:gameId/result" element={<DistortionResultPage />} />
+      <Route path="/training" element={<TrainingTypesPage />} />
+      <Route path="/training/:slug" element={<TrainingSessionPage />} />
+      <Route path="/training/:slug/result" element={<TrainingResultPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )

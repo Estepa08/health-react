@@ -7,6 +7,7 @@ import { authRouter } from './routes/auth.js'
 import { resultsRouter } from './routes/results.js'
 import { distortionGamesRouter } from './routes/distortionGames.js'
 import { distortionAttemptsRouter } from './routes/distortionAttempts.js'
+import { distortionTrainingRouter } from './routes/distortionTraining.js'
 import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
@@ -21,6 +22,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/results', resultsRouter)
 app.use('/api/distortion-games', distortionGamesRouter)
 app.use('/api/distortion-attempts', distortionAttemptsRouter)
+app.use('/api/distortion-training', distortionTrainingRouter)
 
 app.use(errorHandler)
 

@@ -12,6 +12,18 @@ export function summarizeByGame(attempts) {
   return byGame
 }
 
+export function summarizeByType(attempts) {
+  const byType = new Map()
+  for (const attempt of attempts) {
+    byType.set(attempt.distortionSlug, {
+      timesPlayed: (byType.get(attempt.distortionSlug)?.timesPlayed ?? 0) + 1,
+      lastPercent: attempt.scorePercent,
+      lastDate: attempt.createdAt,
+    })
+  }
+  return byType
+}
+
 export function groupByGame(attempts) {
   const byGame = new Map()
   for (const attempt of attempts) {
