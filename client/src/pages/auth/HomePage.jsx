@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layout/SurveyLayout'
 import LoginForm from '../../components/auth/LoginForm'
 import RegisterForm from '../../components/auth/RegisterForm'
-import { getMe, login, register } from '../../api/auth'
+import { getMe, login, register, sanitizeUser } from '../../api/auth'
 
 function HomePage() {
   const [mode, setMode] = useState('login')
@@ -20,7 +20,7 @@ function HomePage() {
 
     getMe(token)
       .then(({ user }) => {
-        localStorage.setItem('user', JSON.stringify(user))
+        localStorage.setItem('user', JSON.stringify(sanitizeUser(user)))
         navigate('/survey', { replace: true })
       })
       .catch(() => {
@@ -35,7 +35,7 @@ function HomePage() {
     try {
       const { token, user } = mode === 'login' ? await login(values) : await register(values)
       localStorage.setItem('token', token)
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem('user', JSON.stringify(sanitizeUser(user)))
       navigate('/survey')
     } catch (err) {
       setSubmitError(err.message)
