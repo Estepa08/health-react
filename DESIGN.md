@@ -2,14 +2,15 @@
 name: health-react
 description: A calm, warm self-assessment survey app for checking in on your mental and emotional wellbeing
 colors:
-  companion-blue: "#2f5896"
-  companion-blue-soft: "#a1b6c9"
-  warm-sand: "#f3f1f5"
-  cool-mist: "#e5e7ec"
-  header-slate: "#c3c9d1"
-  nav-active: "#9dabbf"
-  ink: "#2c3e50"
-  surface: "#ffffff"
+  companion-teal: "#3a6d5a"
+  companion-teal-soft: "#5fa088"
+  sage: "#c7d3c9"
+  sage-deep: "#33422f"
+  cream: "#f2ead9"
+  mustard: "#d9a319"
+  terracotta: "#b3402f"
+  ink: "#2a2a28"
+  surface: "#f2ead9"
 typography:
   headline:
     fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif"
@@ -33,16 +34,16 @@ spacing:
   xl: "48px"
 components:
   button-primary:
-    backgroundColor: "{colors.companion-blue}"
-    textColor: "{colors.surface}"
+    backgroundColor: "{colors.companion-teal}"
+    textColor: "#ffffff"
     rounded: "{rounded.sm}"
     padding: "8px 16px"
   button-primary-hover:
-    backgroundColor: "{colors.companion-blue}"
-    textColor: "{colors.surface}"
+    backgroundColor: "{colors.companion-teal}"
+    textColor: "#ffffff"
   button-outline:
     backgroundColor: "{colors.surface}"
-    textColor: "{colors.companion-blue}"
+    textColor: "{colors.companion-teal}"
     rounded: "{rounded.sm}"
   card:
     backgroundColor: "{colors.surface}"
@@ -55,34 +56,36 @@ components:
 
 **Creative North Star: "The Quiet Companion"**
 
-The app is a quiet, steady presence at someone's side while they check in on how they're doing — never a clinical intake form, never a gamified quiz. Density stays low: one question at a time, generous white space, nothing competing for attention. The palette leans on a single desaturated navy-blue (`#2f5896`) already established across every primary action in the product, paired with soft gray-blues and a warm-tinted neutral background instead of clinical white. This is deliberate: the existing blue reads competent and calm rather than cold, and the surrounding warmth (soft gradients, gentle card lift) keeps it from tipping into corporate-dashboard territory.
+The app is a quiet, steady presence at someone's side while they check in on how they're doing — never a clinical intake form, never a gamified quiz. Density stays low: one question at a time, generous white space, nothing competing for attention. The palette has shifted from a desaturated navy-blue to a warm, earthy system — sage green for structure, cream for surfaces, a deep teal for primary actions, and mustard as a selection/state accent — while keeping the same restrained, tactile philosophy: one steady accent carries primary actions, warmth comes from the surrounding neutrals, not from decoration.
 
 This system explicitly rejects the unstyled-Bootstrap-starter look it grew out of — default `btn-primary` blue with no intention behind it, flat gray gradients with no warmth, and box-shadow values copy-pasted without a philosophy. Every token here exists because it's already load-bearing in the product; nothing is decorative.
 
 **Key Characteristics:**
-- One steady accent color (`#2f5896`) carries all primary actions — no competing accents.
-- Warm-tinted neutral surfaces, not sterile white or cold gray.
+- One steady accent color (`#3a6d5a`, Companion Teal) carries all primary actions — no competing accents.
+- Mustard (`#d9a319`) is reserved for a single, distinct role: selection/current-state outlines.
+- Warm cream and sage neutral surfaces, not sterile white or cold gray-blue.
 - Gentle, consistent lift on cards and buttons — tactile, not flat, not glassy.
 - Low density: one question, one card, one decision at a time.
 
 ## 2. Colors
 
-A restrained palette: one steady accent, warm-tinted neutrals, and a soft gray-blue for secondary structure (nav, header bar).
+A restrained palette: one steady accent, warm-tinted neutrals, and sage for secondary structure (nav, header bar).
 
 ### Primary
-- **Companion Blue** (#2f5896): The one accent in the system. Used for every primary action — survey option selection, submit buttons, the "Start" and "Try again" CTAs. Never diluted into a secondary role.
+- **Companion Teal** (#3a6d5a): The primary accent in the system. Used for every primary action — submit buttons, the "Start" and "Try again" CTAs, focus rings, links.
 
 ### Secondary
-- **Soft Slate** (#a1b6c9): Secondary buttons, active nav state background (`#9dabbf`), quiet structural elements that support the primary blue without competing with it.
+- **Mustard** (#d9a319): A single, distinct secondary role — selection outlines and current-state indicators (theme-card hover/focus, the "unsure" swipe badge). Never used for primary actions, so it stays legible as a state signal.
+- **Terracotta** (#b3402f): Reserved for the negative/"disagree" signal on distortion cards, echoing the original screenshot's accent icon color without competing with Teal or Mustard.
 
 ### Neutral
-- **Warm Sand** (#f3f1f5) / **Cool Mist** (#e5e7ec): The body background gradient — a soft warm-to-cool wash instead of flat white or gray, giving the page a gentle atmosphere at rest.
-- **Header Slate** (#c3c9d1): Background for the logged-in user bar (name + logout).
-- **Ink** (#2c3e50): Heading text color — softer than pure black, keeps headlines calm rather than heavy.
-- **Surface** (#ffffff): Card backgrounds, button text on filled buttons.
+- **Sage** (#c7d3c9) / **Cream** (#f2ead9): The body background gradient — a soft green-to-warm wash instead of flat white or cool gray, giving the page a gentle, grounded atmosphere at rest.
+- **Sage Deep** (#33422f): Background for the dashboard sidebar (dark mode of the same hue family, replacing the old navy).
+- **Ink** (#2a2a28): Heading and body text color — warm near-black, keeps headlines calm rather than heavy.
+- **Surface** (#f2ead9): Card backgrounds — warm cream instead of stark white.
 
 ### Named Rules
-**The One Blue Rule.** Companion Blue is the only saturated color in the system. It appears on primary actions and nothing else — no second accent color competing for attention, ever.
+**The One Teal Rule.** Companion Teal is the only accent used for actions (buttons, links, primary focus). Mustard and Terracotta are state signals, not action colors — they never appear on a clickable primary button.
 
 ## 3. Typography
 
@@ -114,38 +117,39 @@ Gently lifted, not flat. Cards and buttons carry a soft, shallow shadow at rest 
 
 ### Buttons
 - **Shape:** Bootstrap default radius (`4px`), consistent across primary, outline, and success states.
-- **Primary:** Solid Companion Blue (`#2f5896`) background, white text, `8px 16px` padding (`.btn` default) or full-width (`w-100`) on auth forms.
-- **Outline:** White background, Companion Blue border and text; used for unselected survey options so the selected state (solid blue) is unambiguous.
+- **Primary:** Solid Companion Teal (`#3a6d5a`) background, white text, `8px 16px` padding (`.btn` default) or full-width (`w-100`) on auth forms.
+- **Outline:** Cream background, Teal border and text; used for unselected survey options so the selected state (solid teal) is unambiguous.
 - **Confirmed/Success:** Bootstrap `btn-success` green, reserved exclusively for a confirmed survey answer — never reused elsewhere, so green stays a single, legible signal.
 - **Hover / Focus:** Background/border/color transition over `0.2s ease` (`.question-option-btn`); outline buttons darken border and get `2px` width on hover/focus-visible for a clear, non-jumpy focus state.
 
 ### Cards
 - **Corner Style:** `8px` radius (Bootstrap default `.card`).
-- **Background:** White (`#ffffff`).
+- **Background:** Warm cream (`#f2ead9`).
 - **Shadow Strategy:** Resting → Lifted per the Elevation section; `0.3s` transform transition on hover.
 - **Border:** None — depth comes from shadow, not stroke.
 - **Internal Padding:** Bootstrap `.card-body` default, content centered both axes; fixed `320px × 480px` footprint for question and theme cards so the one-question-at-a-time flow feels consistent screen to screen.
 
 ### Inputs / Fields
 - **Style:** Bootstrap default form-control (light border, white background, `4px` radius).
-- **Focus:** Bootstrap default blue focus ring — consistent with Companion Blue as the single accent.
+- **Focus:** Teal focus ring — consistent with Companion Teal as the primary accent.
 - **Error:** Formik/Yup validation messages in Bootstrap's default danger red, shown inline below the field.
 
 ### Navigation
-- **Style:** No persistent top nav; a single header bar (`#c3c9d1` background, `8px` radius, `16px` padding) shows the logged-in user's name and a small outline-secondary logout button, only when authenticated.
-- **Theme Selector:** A Bootstrap Carousel of `320×480px` cards, one theme per slide, no numbered indicators — browsing themes feels like flipping through options, not filling a form field.
+- **Style:** No persistent top nav; a single header bar (`#c7d3c9` sage background, `8px` radius, `16px` padding) shows the logged-in user's name and a small outline-secondary logout button, only when authenticated.
+- **Theme Selector:** A Bootstrap Carousel of `320×480px` cards, one theme per slide, no numbered indicators — browsing themes feels like flipping through options, not filling a form field. Hover/focus outline uses Mustard as the selection signal.
 
 ## 6. Do's and Don'ts
 
 ### Do:
-- **Do** keep Companion Blue (`#2f5896`) as the only saturated accent color in the system.
+- **Do** keep Companion Teal (`#3a6d5a`) as the only accent color used on actionable elements.
+- **Do** use Mustard (`#d9a319`) only for selection/current-state outlines, never for buttons or links.
 - **Do** use soft, diffuse shadows (`rgba(0,0,0,0.1–0.2)`, large blur) for all elevation — never a hard, sharp shadow.
 - **Do** keep one question / one card on screen at a time; resist adding secondary content that competes with the current prompt.
 - **Do** reserve green (`btn-success`) exclusively for confirmed survey answers.
 - **Do** keep body copy warm and plain — short sentences, no clinical jargon, no diagnostic language.
 
 ### Don't:
-- **Don't** introduce a second accent color alongside Companion Blue; it dilutes the One Blue Rule.
+- **Don't** put Mustard or Terracotta on a primary action button; that dilutes their meaning as state signals.
 - **Don't** let the interface slip back into the unstyled-Bootstrap-starter look (default blue with no intention, flat gray-only backgrounds, copy-pasted shadow values) that this system explicitly moved away from.
 - **Don't** use a hard drop-shadow or flat, shadow-less cards — both break the "gently lifted, tactile" feel.
 - **Don't** use clinical/cold visual language (sterile white forms, hospital-form aesthetics) even on the heavier survey themes (anxiety, depression, burnout); the warmth of the system should hold across all themes.
