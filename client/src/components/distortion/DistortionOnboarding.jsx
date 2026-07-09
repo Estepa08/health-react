@@ -29,7 +29,7 @@ function DistortionOnboarding({ onStart }) {
             aria-hidden="true"
           >
             ✓
-          </span>
+          </span>{' '}
           Смахни карточку влево — если согласен с мыслью
         </li>
         <li>
@@ -39,17 +39,17 @@ function DistortionOnboarding({ onStart }) {
             aria-hidden="true"
           >
             ✕
-          </span>
+          </span>{' '}
           Смахни вправо — если не согласен
         </li>
         <li>
           <span
             className="distortion-onboarding-legend-icon"
-            style={{ backgroundColor: '#c9930f' }}
+            style={{ backgroundColor: '#8c6b0a' }}
             aria-hidden="true"
           >
             ?
-          </span>
+          </span>{' '}
           Смахни вниз — если не уверен
         </li>
       </ul>

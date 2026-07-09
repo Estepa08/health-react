@@ -15,7 +15,9 @@ function buildMonthGrid(monthDate) {
   const leadingBlanks = (first.getDay() + 6) % 7
 
   const cells = []
-  for (let i = 0; i < leadingBlanks; i++) cells.push(null)
+  for (let i = leadingBlanks; i > 0; i--) {
+    cells.push(new Date(monthDate.getFullYear(), monthDate.getMonth(), 1 - i))
+  }
   for (let day = 1; day <= daysInMonth; day++) {
     cells.push(new Date(monthDate.getFullYear(), monthDate.getMonth(), day))
   }
@@ -71,11 +73,12 @@ function ResultsCalendar({ results, resultLevels }) {
         </div>
 
         <div className="calendar-grid">
-          {cells.map((date, index) => {
-            if (!date)
-              return <div key={`blank-${index}`} className="calendar-day calendar-day-empty" />
-
+          {cells.map((date) => {
             const dateKey = date.toLocaleDateString('sv-SE')
+
+            if (date.getMonth() !== monthDate.getMonth())
+              return <div key={dateKey} className="calendar-day calendar-day-empty" />
+
             const dayResults = resultsByDate.get(dateKey) ?? []
             const hasResults = dayResults.length > 0
             const isToday = dateKey === today
@@ -99,8 +102,8 @@ function ResultsCalendar({ results, resultLevels }) {
                 <span className="calendar-day-number">{date.getDate()}</span>
                 {hasResults && (
                   <span className="calendar-day-dots">
-                    {dayResults.slice(0, 3).map((result, i) => (
-                      <span key={i} className="calendar-day-dot" />
+                    {dayResults.slice(0, 3).map((result) => (
+                      <span key={result.id} className="calendar-day-dot" />
                     ))}
                     {dayResults.length > 3 && (
                       <span className="calendar-day-more">+{dayResults.length - 3}</span>

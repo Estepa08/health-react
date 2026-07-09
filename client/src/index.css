@@ -950,8 +950,8 @@ h1 {
   top: 16px;
   left: 50%;
   color: #ffffff;
-  background-color: #c9930f;
-  border-color: #c9930f;
+  background-color: #8c6b0a;
+  border-color: #8c6b0a;
 }
 
 .distortion-action-btn {
@@ -993,7 +993,7 @@ h1 {
 
 .distortion-action-unsure .distortion-action-icon {
   background-color: #faf1da;
-  color: #c9930f;
+  color: #836408;
 }
 
 .distortion-action-agree .distortion-action-icon {
