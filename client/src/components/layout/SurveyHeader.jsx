@@ -31,7 +31,7 @@ function Header() {
           style={{ backgroundColor: buttonColors.outlineSecondary }}
           onClick={() => navigate('/dashboard')}
         >
-          Дашборд
+          Статистика
         </button>
         <button
           type="button"
