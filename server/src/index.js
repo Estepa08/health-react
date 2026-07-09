@@ -13,6 +13,7 @@ import { errorHandler } from './middleware/errorHandler.js'
 const app = express()
 const PORT = process.env.PORT || 3000
 
+app.disable('x-powered-by')
 app.use(cors())
 app.use(express.json())
 
