@@ -11,10 +11,7 @@ function NotFoundPage() {
           <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
             <h1 className="card-title mb-3">404</h1>
             <p className="mb-4">Страница не найдена</p>
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate('/')}
-            >
+            <button className="btn btn-primary" onClick={() => navigate('/')}>
               На главную
             </button>
           </div>

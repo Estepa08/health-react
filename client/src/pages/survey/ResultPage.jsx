@@ -57,7 +57,8 @@ function ResultPage() {
   const level = findResultLevel(resultLevels, totalScore)
   const maxPossibleScore = resultLevels.reduce((max, item) => Math.max(max, item.maxScore), 0)
   const isGoodResult = maxPossibleScore > 0 && totalScore >= maxPossibleScore / 2
-  const scorePercent = maxPossibleScore > 0 ? Math.min(100, Math.max(0, (totalScore / maxPossibleScore) * 100)) : 0
+  const scorePercent =
+    maxPossibleScore > 0 ? Math.min(100, Math.max(0, (totalScore / maxPossibleScore) * 100)) : 0
 
   return (
     <Layout>
