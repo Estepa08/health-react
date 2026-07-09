@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import QuestionCard from '../QuestionCard'
 
@@ -57,5 +57,24 @@ describe('QuestionCard', () => {
     questionData.options.forEach((option) => {
       expect(screen.getByRole('button', { name: option.label })).toBeDisabled()
     })
+  })
+
+  it('shows an exiting copy of the previous prompt when the question changes', async () => {
+    const nextQuestion = {
+      id: 2,
+      prompt: 'Как часто вы чувствуете усталость?',
+      options: questionData.options,
+    }
+    const { rerender } = render(
+      <QuestionCard questionData={{ id: 1, ...questionData }} onSelect={() => {}} />
+    )
+
+    rerender(<QuestionCard questionData={nextQuestion} onSelect={() => {}} />)
+
+    const exitingEl = screen.getByText(questionData.prompt)
+    expect(exitingEl).toHaveClass('question-prompt-exit')
+
+    fireEvent.animationEnd(exitingEl)
+    await waitFor(() => expect(screen.queryByText(questionData.prompt)).not.toBeInTheDocument())
   })
 })

@@ -48,4 +48,30 @@ describe('ResultsCalendar', () => {
       expect(cell.textContent).toBe('')
     })
   })
+
+  it('builds the tooltip without a level label when the score matches no level', () => {
+    const results = [makeResult({ score: 999 })]
+    const { container } = render(<ResultsCalendar results={results} resultLevels={resultLevels} />)
+    const dayWithResults = container.querySelector('.calendar-day-has-results')
+    expect(dayWithResults.title).toBe('Тревога: 999')
+  })
+
+  it('falls back to an empty emoji when the matched level has none', () => {
+    const results = [makeResult({ score: 5 })]
+    const levelsWithoutEmoji = [{ minScore: 0, maxScore: 10, title: 'Норма' }]
+    const { container } = render(
+      <ResultsCalendar results={results} resultLevels={levelsWithoutEmoji} />
+    )
+    const dayWithResults = container.querySelector('.calendar-day-has-results')
+    expect(dayWithResults.title).toBe('Тревога: 5 —  Норма')
+  })
+
+  it("marks today's cell", () => {
+    const today = new Date().toLocaleDateString('sv-SE')
+    const results = [makeResult({ createdAt: new Date().toISOString() })]
+    const { container } = render(<ResultsCalendar results={results} resultLevels={resultLevels} />)
+    const todayCell = container.querySelector('.calendar-day-today')
+    expect(todayCell).not.toBeNull()
+    expect(todayCell.textContent).toContain(String(new Date(today).getDate()))
+  })
 })
