@@ -26,6 +26,8 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm run test:coverage
+      - name: Fix lcov paths for SonarCloud (repo-root-relative)
+        run: sed -i 's#^SF:#SF:client/#' coverage/lcov.info
       - uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8 # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
