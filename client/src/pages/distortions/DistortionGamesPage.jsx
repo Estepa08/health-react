@@ -69,11 +69,6 @@ function DistortionGamesPage() {
           )
         })}
       </div>
-      <div className="text-center mt-4">
-        <button className="btn btn-outline-primary" onClick={() => navigate('/training')}>
-          Тренировка по искажениям
-        </button>
-      </div>
     </Layout>
   )
 }

@@ -5,7 +5,6 @@ import StatCardsSection from '../../components/dashboard/StatCardsSection'
 import ThemeChartsSection from '../../components/dashboard/ThemeChartsSection'
 import DistortionChartsSection from '../../components/dashboard/DistortionChartsSection'
 import HistoryTable from '../../components/dashboard/HistoryTable'
-import DashboardActions from '../../components/dashboard/DashboardActions'
 import { useDashboardData } from '../../hooks/useDashboardData'
 import { computeStats, formatDate, groupByTheme } from '../../utils/dashboardStats'
 import { groupByGame } from '../../utils/distortionStats'
@@ -45,7 +44,6 @@ function DashboardPage() {
       <DashboardLayout>
         <div className="text-center d-flex flex-column gap-2 align-items-center">
           <p className="text-meta mb-2">У вас пока нет пройденных тестов.</p>
-          <DashboardActions primaryLabel="Пройти первый тест" />
         </div>
       </DashboardLayout>
     )
@@ -69,7 +67,6 @@ function DashboardPage() {
       <ThemeChartsSection themeGroups={themeGroups} />
       <DistortionChartsSection distortionGameGroups={distortionGameGroups} />
       <HistoryTable historyRows={historyRows} resultLevels={resultLevels} />
-      <DashboardActions primaryLabel="Пройти новый тест" />
     </DashboardLayout>
   )
 }

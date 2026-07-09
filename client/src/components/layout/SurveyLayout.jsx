@@ -1,7 +1,10 @@
 import SurveyHeader from './SurveyHeader'
+import DashboardSidebar from './DashboardSidebar'
 
 function Layout({ children, progressBar }) {
-  return (
+  const isAuthenticated = Boolean(localStorage.getItem('user'))
+
+  const content = (
     <>
       <SurveyHeader />
       <div className="d-flex justify-content-center survey-progress-bar">
@@ -13,6 +16,17 @@ function Layout({ children, progressBar }) {
         </div>
       </div>
     </>
+  )
+
+  if (!isAuthenticated) {
+    return content
+  }
+
+  return (
+    <div className="md-shell">
+      <DashboardSidebar />
+      <div className="md-content">{content}</div>
+    </div>
   )
 }
 

@@ -103,10 +103,6 @@ function SurveyPage() {
     advance(answers)
   }
 
-  const viewHistory = () => {
-    navigate('/dashboard')
-  }
-
   const progress = hasStarted ? (currentIndex / (questions.length - 1)) * 100 : 0
 
   if (!selectedTheme) {
@@ -114,14 +110,6 @@ function SurveyPage() {
       <Layout>
         {themesError && <p className="text-danger text-center text-meta">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
-        <div className="text-center mt-3 d-flex flex-column gap-2 align-items-center">
-          <button className="btn btn-outline-secondary" onClick={viewHistory}>
-            Просмотр истории
-          </button>
-          <button className="btn btn-outline-primary" onClick={() => navigate('/distortions')}>
-            Игры на когнитивные искажения
-          </button>
-        </div>
       </Layout>
     )
   }

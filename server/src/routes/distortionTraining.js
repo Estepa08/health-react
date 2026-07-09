@@ -11,6 +11,17 @@ import { requireAuth } from '../middleware/auth.js'
 
 export const distortionTrainingRouter = Router()
 
+const SITUATIONS_PER_SESSION = 10
+
+function shuffle(array) {
+  const result = [...array]
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+
 distortionTrainingRouter.get('/types', async (req, res, next) => {
   try {
     const rows = await db.select().from(distortionTypes).orderBy(asc(distortionTypes.nameRu))
@@ -24,16 +35,18 @@ distortionTrainingRouter.get('/situations', async (req, res, next) => {
   try {
     const { slug } = req.query
 
-    const situations = slug
+    const allSituations = slug
       ? await db
           .select()
           .from(distortionSituations)
           .where(eq(distortionSituations.distortionSlug, slug))
       : await db.select().from(distortionSituations)
 
-    if (situations.length === 0) {
+    if (allSituations.length === 0) {
       return res.json([])
     }
+
+    const situations = shuffle(allSituations).slice(0, SITUATIONS_PER_SESSION)
 
     const options = await db
       .select()
@@ -89,10 +102,7 @@ distortionTrainingRouter.post('/attempts', requireAuth, async (req, res, next) =
 
     const situationsById = new Map(situations.map((situation) => [situation.id, situation]))
 
-    if (
-      situationIds.length !== situations.length ||
-      !situationIds.every((id) => situationsById.has(id))
-    ) {
+    if (!situationIds.every((id) => situationsById.has(id))) {
       return res.status(400).json({ error: 'answers не соответствуют ситуациям этого типа' })
     }
 
