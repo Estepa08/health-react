@@ -6,6 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Communicate with the user in Russian.
 - Before running any shell/bash command, give a very short (few words) explanation of what the command does.
+- Lint and test commands (`npm run lint`, `npm run test`, `npm run test:coverage`, `npm run format:check`, `make test*`, and equivalents in `client/`/`server/`) may be run freely without asking for prior confirmation.
 
 ## Project overview
 
