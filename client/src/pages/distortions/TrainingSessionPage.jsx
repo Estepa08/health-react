@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Layout from '../../components/layout/SurveyLayout'
 import SituationCard from '../../components/training/SituationCard'
-import { fetchDistortionSituations, saveDistortionTrainingAttempt } from '../../api/distortionTraining'
+import {
+  fetchDistortionSituations,
+  saveDistortionTrainingAttempt,
+} from '../../api/distortionTraining'
 
 function TrainingSessionPage() {
   const navigate = useNavigate()
