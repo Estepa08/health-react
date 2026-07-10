@@ -62,9 +62,8 @@ function DistortionCard({ thought, onSwipe, disabled }) {
   return (
     <div className="d-flex flex-column align-items-center px-3 px-sm-5">
       <div
-        className="card distortion-card survey-card-width"
+        className="card distortion-card survey-card-width card-min-height-420"
         style={{
-          height: '420px',
           touchAction: 'none',
           cursor: isDragging ? 'grabbing' : 'grab',
           transform: `translate(${offset.x}px, ${offset.y}px) rotate(${rotation}deg)`,

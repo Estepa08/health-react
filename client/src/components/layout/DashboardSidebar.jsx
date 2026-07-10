@@ -47,16 +47,17 @@ function Sidebar() {
           <button
             key={link.key}
             type="button"
+            title={link.label}
             className={`md-sidebar-link${location.pathname.startsWith(link.to) ? ' active' : ''}`}
             onClick={() => navigate(link.to)}
           >
             {link.icon}
-            {link.label}
+            <span className="md-sidebar-link-label">{link.label}</span>
           </button>
         ))}
-        <button type="button" className="md-sidebar-link" onClick={handleLogout}>
+        <button type="button" title="Выход" className="md-sidebar-link" onClick={handleLogout}>
           <BoxArrowRight size={18} />
-          Выход
+          <span className="md-sidebar-link-label">Выход</span>
         </button>
       </div>
     </nav>

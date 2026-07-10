@@ -50,10 +50,10 @@ function HomePage() {
     <Layout>
       <div className="d-flex justify-content-center px-3 px-sm-5">
         <div
-          className="card card-material"
-          style={{ width: '320px', maxWidth: '100%', height: '480px' }}
+          className="card card-material card-min-height-480"
+          style={{ width: '320px', maxWidth: '100%' }}
         >
-          <div className="card-body d-flex flex-column" style={{ overflowY: 'auto' }}>
+          <div className="card-body d-flex flex-column">
             <ul className="nav nav-tabs auth-tabs mb-4">
               <li className="nav-item">
                 <button

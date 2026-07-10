@@ -4,8 +4,7 @@ function DistortionOnboarding({ onStart }) {
       <h5 className="card-ink-title mb-3 text-center">Как играть</h5>
 
       <div
-        className="card distortion-card survey-card-width distortion-onboarding-card"
-        style={{ height: '260px' }}
+        className="card distortion-card survey-card-width distortion-onboarding-card card-min-height-260"
       >
         <div className="card-body d-flex flex-column justify-content-center align-items-center text-center position-relative">
           <span className="distortion-swipe-badge distortion-swipe-badge-agree distortion-onboarding-badge-agree">

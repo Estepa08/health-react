@@ -52,7 +52,7 @@ function DistortionGamesPage() {
               }}
             >
               <div className="card-body d-flex flex-column gap-2">
-                <h6 className="card-title theme-card-title mb-1 list-card-title">{game.title}</h6>
+                <h6 className="card-title mb-1 list-card-title">{game.title}</h6>
                 <p className="card-text text-meta mb-0 list-card-text">{game.description}</p>
                 <p className="text-meta mb-0 mt-auto list-card-progress">
                   {progress ? `Пройдено: ${progress.timesPlayed} раз` : 'Ещё не пройдено'}

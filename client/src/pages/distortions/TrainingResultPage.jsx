@@ -19,7 +19,7 @@ function TrainingResultPage() {
   return (
     <Layout>
       <div className="d-flex justify-content-center px-3 px-sm-5">
-        <div className="card survey-card-width" style={{ height: '480px' }}>
+        <div className="card survey-card-width card-min-height-480">
           <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
             <h1 className="card-title result-score-value mb-4">{attempt.scorePercent}%</h1>
             <p className="card-ink-text result-level-description mb-4">

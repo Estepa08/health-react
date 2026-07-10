@@ -14,8 +14,8 @@ function ThemeSelector({ themes, onSelect }) {
         <Carousel.Item key={theme.id}>
           <div className="d-flex justify-content-center px-3 px-sm-5">
             <div
-              className="card theme-card survey-card-width"
-              style={{ height: '480px', cursor: 'pointer' }}
+              className="card theme-card survey-card-width card-min-height-480"
+              style={{ cursor: 'pointer' }}
               role="button"
               tabIndex={0}
               onClick={() => onSelect(theme.id)}
