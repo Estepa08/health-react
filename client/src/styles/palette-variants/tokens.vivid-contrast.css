@@ -46,15 +46,15 @@
   --md-terracotta: #c4574b;
   --md-terracotta-tint-bg: #f6dcda;
   --md-terracotta-tint-ink: #8a352c;
-  --md-terracotta-hover: #8a352c;
+  --md-terracotta-hover: #8f4037;
   --md-confirm-green: #4f6b3f;
   --md-confirm-green-hover: #3d5330;
 
   --color-primary: #03363d;
-  --color-primary-hover: #02262b;
+  --color-primary-hover: #3a6268;
   --color-primary-ring: rgba(3, 54, 61, 0.2);
   --color-secondary: #5b8a8e;
-  --color-secondary-hover: #12262a;
+  --color-secondary-hover: #426568;
   --color-text-muted: #4d6a6d;
   --color-border-muted: #d7e6e3;
   --color-disabled: #9fb6b3;
