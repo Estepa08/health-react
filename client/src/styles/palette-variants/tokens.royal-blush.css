@@ -1,0 +1,65 @@
+/* Вариант палитры: Королевский синий (#3447AA) + Пудровый розовый (#FBEAEB) */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+
+  --color-bg-app: #8892c7;
+  --color-bg-card: #fbeaeb;
+  --color-bg-accent: #dce1f5;
+  --color-progress-fill: #3447aa;
+  --color-progress-empty: #e0e0e0;
+  --color-answer-selected: #e8879a;
+  --color-answer-selected-border: #cf6b80;
+  --color-answer-mid: #fbeaeb;
+  --color-answer-mid-border: #e3c6c9;
+  --color-answer-default: #ffffff;
+  --color-text-heading: #1a1a2e;
+  --color-icon-light: #ffffff;
+
+  --md-sidebar-bg: #22307a;
+  --md-sidebar-ink: #d7d9f2;
+  --md-sidebar-ink-active: #ffffff;
+  --md-sidebar-active-bg: rgba(255, 255, 255, 0.08);
+  --md-surface: var(--color-bg-card);
+  --md-shadow: 0 20px 27px rgba(0, 0, 0, 0.05);
+  --md-shadow-hover: 0 8px 26px rgba(0, 0, 0, 0.12);
+  --md-radius: 1rem;
+
+  --md-grad-primary: linear-gradient(195deg, #3447aa, #22307a);
+  --md-grad-info: linear-gradient(195deg, #6d7fd6, #3447aa);
+  --md-grad-success: linear-gradient(195deg, #66bb6a, #43a047);
+  --md-grad-warning: linear-gradient(195deg, #e0ac2b, #c9930f);
+
+  --md-option-hover-bg: var(--color-answer-mid);
+  --md-option-hover-border: var(--color-answer-mid-border);
+  --md-option-active-bg: var(--color-answer-selected);
+  --md-option-active-border: var(--color-answer-selected-border);
+  --md-option-active-ink: var(--color-text-heading);
+
+  --md-question-panel-bg: var(--color-bg-accent);
+
+  --md-terracotta: #c94f68;
+  --md-terracotta-tint-bg: #fbeaeb;
+  --md-terracotta-tint-ink: #a53350;
+  --md-terracotta-hover: #8f2e42;
+  --md-confirm-green: #4f6b3f;
+  --md-confirm-green-hover: #3d5330;
+
+  --color-primary: #3447aa;
+  --color-primary-hover: #22307a;
+  --color-primary-ring: rgba(52, 71, 170, 0.2);
+  --color-secondary: #8892c7;
+  --color-secondary-hover: #5b64a8;
+  --color-text-muted: #6a6f9e;
+  --color-border-muted: #e9d9db;
+  --color-disabled: #b3b8de;
+
+  --md-amber: #c9930f;
+  --md-amber-tint-bg: #f7ecd2;
+  --md-amber-tint-ink: #8a6208;
+  --md-success-tint-bg: #eef0fb;
+  --md-success-tint-ink: #3447aa;
+}

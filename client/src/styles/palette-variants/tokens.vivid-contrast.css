@@ -1,0 +1,68 @@
+/* Вариант палитры: Живой контраст — насыщенный акцент для игровых элементов
+   (#03363D + #BDD9D7 + #E8B93E positive + #C4574B negative) */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+
+  --color-bg-app: #12262a;
+  --color-bg-card: #f8f9f7;
+  --color-bg-accent: #bdd9d7;
+  --color-progress-fill: #e8b93e;
+  --color-progress-empty: #e0e0e0;
+  --color-answer-selected: #e8b93e;
+  --color-answer-selected-border: #c99a24;
+  --color-answer-mid: #f6ecc9;
+  --color-answer-mid-border: #e1cc8f;
+  --color-answer-default: #ffffff;
+  --color-text-heading: #12262a;
+  --color-icon-light: #ffffff;
+
+  --md-sidebar-bg: #03363d;
+  --md-sidebar-ink: #bdd9d7;
+  --md-sidebar-ink-active: #e8b93e;
+  --md-sidebar-active-bg: rgba(255, 255, 255, 0.08);
+  --md-surface: var(--color-bg-card);
+  --md-shadow: 0 20px 27px rgba(0, 0, 0, 0.05);
+  --md-shadow-hover: 0 8px 26px rgba(0, 0, 0, 0.12);
+  --md-radius: 1rem;
+
+  --md-grad-primary: linear-gradient(195deg, #12262a, #03363d);
+  --md-grad-info: linear-gradient(195deg, #e8b93e, #c99a24);
+  --md-grad-success: linear-gradient(195deg, #66bb6a, #43a047);
+  --md-grad-warning: linear-gradient(195deg, #e0ac2b, #c9930f);
+
+  --md-option-hover-bg: var(--color-answer-mid);
+  --md-option-hover-border: var(--color-answer-mid-border);
+  --md-option-active-bg: var(--color-answer-selected);
+  --md-option-active-border: var(--color-answer-selected-border);
+  --md-option-active-ink: var(--color-text-heading);
+
+  --md-question-panel-bg: var(--color-bg-accent);
+
+  /* Негативный акцент (ошибка/неверный ответ в играх) */
+  --md-terracotta: #c4574b;
+  --md-terracotta-tint-bg: #f6dcda;
+  --md-terracotta-tint-ink: #8a352c;
+  --md-terracotta-hover: #8a352c;
+  --md-confirm-green: #4f6b3f;
+  --md-confirm-green-hover: #3d5330;
+
+  --color-primary: #03363d;
+  --color-primary-hover: #02262b;
+  --color-primary-ring: rgba(3, 54, 61, 0.2);
+  --color-secondary: #5b8a8e;
+  --color-secondary-hover: #12262a;
+  --color-text-muted: #4d6a6d;
+  --color-border-muted: #d7e6e3;
+  --color-disabled: #9fb6b3;
+
+  /* Позитивный акцент (верный ответ в играх) */
+  --md-amber: #e8b93e;
+  --md-amber-tint-bg: #f6ecc9;
+  --md-amber-tint-ink: #8a6208;
+  --md-success-tint-bg: #f6ecc9;
+  --md-success-tint-ink: #8a6208;
+}
