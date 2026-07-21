@@ -1,11 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
-import {
-  BarChartLine,
-  BoxArrowRight,
-  ClipboardCheck,
-  Controller,
-  Trophy,
-} from 'react-bootstrap-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { BarChartIcon, Logout01Icon, ClipboardCheckIcon, GameController01Icon, Award01Icon } from '@hugeicons/core-free-icons'
 
 function Sidebar() {
   const navigate = useNavigate()
@@ -21,28 +16,28 @@ function Sidebar() {
     {
       key: 'survey',
       label: 'Пройти новый тест',
-      icon: <ClipboardCheck size={18} />,
+      icon: <HugeiconsIcon icon={ClipboardCheckIcon} size={18} />,
       to: '/survey',
     },
-    { key: 'dashboard', label: 'Статистика', icon: <BarChartLine size={18} />, to: '/dashboard' },
+    { key: 'dashboard', label: 'Статистика', icon: <HugeiconsIcon icon={BarChartIcon} size={18} />, to: '/dashboard' },
     {
       key: 'distortions',
       label: 'Игры на когнитивные искажения',
-      icon: <Controller size={18} />,
+      icon: <HugeiconsIcon icon={GameController01Icon} size={18} />,
       to: '/distortions',
     },
     {
       key: 'training',
       label: 'Тренировка по искажениям',
-      icon: <Trophy size={18} />,
+      icon: <HugeiconsIcon icon={Award01Icon} size={18} />,
       to: '/training',
     },
   ]
 
   return (
-    <nav className="md-sidebar d-flex flex-column">
+    <nav className="md-sidebar flex flex-col">
       <div className="md-sidebar-brand">Mental Health</div>
-      <div className="d-flex flex-column gap-1">
+      <div className="flex flex-col gap-1">
         {links.map((link) => (
           <button
             key={link.key}
@@ -55,7 +50,7 @@ function Sidebar() {
           </button>
         ))}
         <button type="button" className="md-sidebar-link" onClick={handleLogout}>
-          <BoxArrowRight size={18} />
+          <HugeiconsIcon icon={Logout01Icon} size={18} />
           Выход
         </button>
       </div>

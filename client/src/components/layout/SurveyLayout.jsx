@@ -7,12 +7,12 @@ function Layout({ children, progressBar, wide = false }) {
   const content = (
     <>
       <SurveyHeader />
-      <div className="d-flex justify-content-center survey-progress-bar">
+      <div className="flex justify-center survey-progress-bar">
         <div className="survey-card-width">{progressBar}</div>
       </div>
-      <div className="container-fluid py-3 py-md-5">
-        <div className="row justify-content-center">
-          <div className={wide ? 'col-12' : 'col-md-8 col-lg-6'}>{children}</div>
+      <div className="w-full px-4 py-3 md:py-5">
+        <div className="flex justify-center">
+          <div className={wide ? 'w-full' : 'md:w-2/3 lg:w-1/2'}>{children}</div>
         </div>
       </div>
     </>

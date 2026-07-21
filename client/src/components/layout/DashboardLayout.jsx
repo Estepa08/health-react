@@ -8,7 +8,7 @@ function DashboardLayout({ children }) {
     <div className="md-shell">
       <DashboardSidebar />
       <div className="md-content">
-        <div className="md-topbar d-flex justify-content-between align-items-center">
+        <div className="md-topbar flex justify-between items-center">
           <h5 className="mb-0">Статистика</h5>
           {user && <span className="text-meta">{user.name}</span>}
         </div>

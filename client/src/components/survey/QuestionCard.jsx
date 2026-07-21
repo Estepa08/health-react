@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 function QuestionCard({
   questionData,
@@ -32,9 +33,9 @@ function QuestionCard({
   const { id, prompt, options } = questionData
 
   return (
-    <div className="d-flex justify-content-center align-items-start gap-3 px-3 px-sm-5">
+    <div className="flex justify-center items-start gap-3 px-3 sm:px-5">
       <div className="question-panel survey-card-width">
-        <div className="d-flex align-items-center justify-content-between w-100 mb-3 question-nav">
+        <div className="flex items-center justify-between w-full mb-3 question-nav">
           <button
             type="button"
             className="btn-arrow"
@@ -67,23 +68,21 @@ function QuestionCard({
             ›
           </button>
         </div>
-        <div className="d-grid gap-2 w-100">
+        <div className="grid gap-2 w-full">
           {options.map((option) => {
             const isConfirmed = option.value === confirmedValue
             const isSelected = option.value === selectedValue
 
             return (
-              <button
+              <Button
                 key={option.value}
-                type="button"
-                className={`btn question-option-btn ${
-                  isConfirmed ? 'btn-success' : isSelected ? 'btn-primary' : 'btn-outline-primary'
-                }`}
+                className={`question-option-btn ${isConfirmed ? 'btn-success' : ''}`}
+                variant={isConfirmed || isSelected ? 'default' : 'outline'}
                 disabled={disabled}
                 onClick={() => onSelect(option.value)}
               >
                 {option.label}
-              </button>
+              </Button>
             )
           })}
         </div>

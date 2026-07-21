@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import Layout from '../components/layout/SurveyLayout'
 
 function NotFoundPage() {
@@ -6,16 +8,16 @@ function NotFoundPage() {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center px-3 px-sm-5">
-        <div className="card" style={{ width: '320px', maxWidth: '100%', height: '480px' }}>
-          <div className="card-body d-flex flex-column justify-content-center align-items-center text-center">
+      <div className="flex justify-center px-3 sm:px-5">
+        <Card style={{ width: '320px', maxWidth: '100%', height: '480px' }}>
+          <CardContent className="flex flex-col justify-center items-center text-center h-full">
             <h1 className="card-title mb-3">404</h1>
             <p className="mb-4">Страница не найдена</p>
-            <button className="btn btn-primary" onClick={() => navigate('/')}>
+            <Button onClick={() => navigate('/')}>
               На главную
-            </button>
-          </div>
-        </div>
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     </Layout>
   )

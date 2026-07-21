@@ -1,0 +1,69 @@
+/* Вариант палитры: Mora Sleep — кастомные цвета */
+:root {
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+
+  --color-bg-app: #0c0c0a;
+  --color-bg-card: rgba(255, 255, 255, 0.04);
+  --color-bg-accent: rgba(149, 140, 129, 0.12);
+  --color-progress-fill: #83ec1a;
+  --color-progress-empty: rgba(255, 255, 255, 0.08);
+  --color-answer-selected: #ede465;
+  --color-answer-selected-border: #cdc444;
+  --color-answer-mid: rgba(149, 140, 129, 0.15);
+  --color-answer-mid-border: #958c81;
+  --color-answer-default: rgba(255, 255, 255, 0.06);
+  --color-text-heading: #ffffff;
+  --color-icon-light: #ffffff;
+
+  --md-sidebar-bg: rgba(12, 12, 10, 0.95);
+  --md-sidebar-ink: #958c81;
+  --md-sidebar-ink-active: #ffffff;
+  --md-sidebar-active-bg: rgba(131, 236, 26, 0.1);
+  --md-surface: var(--color-bg-card);
+  --md-shadow: 0 20px 27px rgba(0, 0, 0, 0.5);
+  --md-shadow-hover: 0 8px 26px rgba(0, 0, 0, 0.6);
+  --md-radius: 1rem;
+
+  --md-grad-primary: linear-gradient(135deg, #83ec1a, #ede465);
+  --md-grad-info: linear-gradient(135deg, #958c81, #ede465);
+  --md-grad-success: linear-gradient(135deg, #83ec1a, #6bc415);
+  --md-grad-warning: linear-gradient(135deg, #ede465, #d4c94a);
+
+  --md-option-hover-bg: var(--color-answer-mid);
+  --md-option-hover-border: var(--color-answer-mid-border);
+  --md-option-active-bg: var(--color-answer-selected);
+  --md-option-active-border: var(--color-answer-selected-border);
+  --md-option-active-ink: #0c0c0a;
+
+  --md-question-panel-bg: rgba(255, 255, 255, 0.04);
+  --md-question-panel-border: rgba(255, 255, 255, 0.08);
+
+  --md-terracotta: #e0685a;
+  --md-terracotta-tint-bg: rgba(224, 104, 90, 0.1);
+  --md-terracotta-tint-ink: #e0685a;
+  --md-terracotta-hover: #c04d40;
+  --md-confirm-green: #83ec1a;
+  --md-confirm-green-hover: #6bc415;
+
+  --color-primary: #83ec1a;
+  --color-primary-hover: #6bc415;
+  --color-primary-ring: rgba(131, 236, 26, 0.35);
+  --color-secondary: #958c81;
+  --color-secondary-hover: #7a7268;
+  --color-text-muted: #958c81;
+  --color-border-muted: rgba(255, 255, 255, 0.08);
+  --color-disabled: rgba(255, 255, 255, 0.15);
+
+  --md-amber: #ede465;
+  --md-amber-tint-bg: rgba(237, 228, 101, 0.1);
+  --md-amber-tint-ink: #ede465;
+  --md-success-tint-bg: rgba(131, 236, 26, 0.08);
+  --md-success-tint-ink: #83ec1a;
+
+  --md-glow-primary: 0 0 20px rgba(131, 236, 26, 0.15);
+  --md-glow-accent: 0 0 20px rgba(237, 228, 101, 0.15);
+}

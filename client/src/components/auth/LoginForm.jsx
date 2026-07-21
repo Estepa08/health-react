@@ -1,5 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { loginSchema } from '../../validation/authSchemas'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 function LoginForm({ onSubmit }) {
   return (
@@ -11,34 +14,18 @@ function LoginForm({ onSubmit }) {
       {({ isSubmitting }) => (
         <Form noValidate>
           <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <Field
-              autoComplete="off"
-              type="email"
-              id="email"
-              name="email"
-              className="form-control"
-            />
-            <ErrorMessage name="email" component="div" className="text-danger small mt-1" />
+            <Label htmlFor="email">Email</Label>
+            <Field as={Input} autoComplete="off" type="email" id="email" name="email" />
+            <ErrorMessage name="email" component="div" className="text-destructive text-xs mt-1" />
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Пароль
-            </label>
-            <Field
-              autoComplete="off"
-              type="password"
-              id="password"
-              name="password"
-              className="form-control"
-            />
-            <ErrorMessage name="password" component="div" className="text-danger small mt-1" />
+            <Label htmlFor="password">Пароль</Label>
+            <Field as={Input} autoComplete="off" type="password" id="password" name="password" />
+            <ErrorMessage name="password" component="div" className="text-destructive text-xs mt-1" />
           </div>
-          <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting}>
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
             Войти
-          </button>
+          </Button>
         </Form>
       )}
     </Formik>

@@ -6,6 +6,8 @@ import {
   fetchDistortionSituations,
   saveDistortionTrainingAttempt,
 } from '../../api/distortionTraining'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 
 function TrainingSessionPage() {
   const navigate = useNavigate()
@@ -72,7 +74,7 @@ function TrainingSessionPage() {
   if (isLoading) {
     return (
       <Layout>
-        <p className="text-center text-meta">Загрузка ситуаций...</p>
+        <p className="text-center text-muted-foreground">Загрузка ситуаций...</p>
       </Layout>
     )
   }
@@ -80,11 +82,11 @@ function TrainingSessionPage() {
   if (error) {
     return (
       <Layout>
-        <p className="text-danger text-center text-meta">{error}</p>
+        <p className="text-destructive text-center text-muted-foreground">{error}</p>
         <div className="text-center">
-          <button className="btn btn-primary" onClick={() => navigate('/training')}>
+          <Button onClick={() => navigate('/training')}>
             Назад к списку тренировок
-          </button>
+          </Button>
         </div>
       </Layout>
     )
@@ -96,10 +98,8 @@ function TrainingSessionPage() {
     <Layout
       progressBar={
         <div>
-          <div className="progress">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="text-center text-caption mt-2">
+          <Progress value={progress} className="h-3" />
+          <p className="text-center text-xs text-muted-foreground mt-2">
             {currentIndex + 1} / {situations.length}
           </p>
         </div>

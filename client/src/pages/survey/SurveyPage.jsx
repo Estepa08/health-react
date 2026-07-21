@@ -7,6 +7,8 @@ import { fetchThemes } from '../../api/themes'
 import { fetchQuestions } from '../../api/questions'
 import { calculateScore } from '../../utils/calculateScore'
 import { saveResult } from '../../api/results'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 
 function SurveyPage() {
   const navigate = useNavigate()
@@ -108,7 +110,7 @@ function SurveyPage() {
   if (!selectedTheme) {
     return (
       <Layout>
-        {themesError && <p className="text-danger text-center text-meta">{themesError}</p>}
+        {themesError && <p className="text-destructive text-center text-muted-foreground">{themesError}</p>}
         <ThemeSelector themes={themes} onSelect={selectTheme} />
       </Layout>
     )
@@ -117,7 +119,7 @@ function SurveyPage() {
   if (isLoadingQuestions) {
     return (
       <Layout>
-        <p className="text-center text-meta">Загрузка вопросов...</p>
+        <p className="text-center text-muted-foreground">Загрузка вопросов...</p>
       </Layout>
     )
   }
@@ -125,11 +127,11 @@ function SurveyPage() {
   if (questionsError) {
     return (
       <Layout>
-        <p className="text-danger text-center text-meta">{questionsError}</p>
+        <p className="text-destructive text-center text-muted-foreground">{questionsError}</p>
         <div className="text-center">
-          <button className="btn btn-primary" onClick={restart}>
+          <Button onClick={restart}>
             Назад к выбору теста
-          </button>
+          </Button>
         </div>
       </Layout>
     )
@@ -139,10 +141,8 @@ function SurveyPage() {
     <Layout
       progressBar={
         <div style={{ visibility: hasStarted ? 'visible' : 'hidden' }}>
-          <div className="progress">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="text-center text-caption mt-2">{Math.round(progress)}%</p>
+          <Progress value={progress} className="h-3" />
+          <p className="text-center text-xs text-muted-foreground mt-2">{Math.round(progress)}%</p>
         </div>
       }
     >

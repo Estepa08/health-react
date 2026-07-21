@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
 
 function Header() {
   const navigate = useNavigate()
@@ -16,24 +17,20 @@ function Header() {
   const initial = user.name?.trim()?.[0]?.toUpperCase() ?? '?'
 
   return (
-    <div className="d-flex justify-content-between align-items-center w-100 mb-4 p-3 rounded header-bar">
-      <div className="d-flex align-items-center gap-2">
+    <div className="flex justify-between items-center w-full mb-4 p-3 rounded header-bar">
+      <div className="flex items-center gap-2">
         <span className="header-avatar" aria-hidden="true">
           {initial}
         </span>
         <span>{user.name}</span>
       </div>
-      <div className="d-flex align-items-center gap-2">
-        <button
-          type="button"
-          className="btn btn-outline-secondary btn-sm"
-          onClick={() => navigate('/dashboard')}
-        >
+      <div className="flex items-center gap-2">
+        <Button variant="outline" size="sm" onClick={() => navigate('/dashboard')}>
           Статистика
-        </button>
-        <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleLogout}>
+        </Button>
+        <Button variant="outline" size="sm" onClick={handleLogout}>
           Выход
-        </button>
+        </Button>
       </div>
     </div>
   )

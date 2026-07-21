@@ -4,6 +4,10 @@ import Layout from '../../components/layout/SurveyLayout'
 import LoginForm from '../../components/auth/LoginForm'
 import RegisterForm from '../../components/auth/RegisterForm'
 import { getMe, login, register, sanitizeUser } from '../../api/auth'
+import { Card, CardContent } from '@/components/ui/card'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Alert } from '@/components/ui/alert'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function HomePage() {
   const [mode, setMode] = useState('login')
@@ -44,39 +48,37 @@ function HomePage() {
     }
   }
 
-  if (checkingToken) return null
+  if (checkingToken) {
+    return (
+      <Layout>
+        <div className="flex justify-center px-3 sm:px-5">
+          <Card className="card-material" style={{ width: '320px', maxWidth: '100%', minHeight: '480px' }}>
+            <CardContent className="flex flex-col gap-3">
+              <Skeleton className="h-9 w-full" />
+              <Skeleton className="h-9 w-full mt-3" />
+              <Skeleton className="h-9 w-full" />
+              <Skeleton className="h-9 w-full mt-2" />
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    )
+  }
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center px-3 px-sm-5">
-        <div
-          className="card card-material"
-          style={{ width: '320px', maxWidth: '100%', height: '480px' }}
-        >
-          <div className="card-body d-flex flex-column" style={{ overflowY: 'auto' }}>
-            <ul className="nav nav-tabs auth-tabs mb-4">
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className={`nav-link ${mode === 'login' ? 'active' : ''}`}
-                  onClick={() => setMode('login')}
-                >
-                  Вход
-                </button>
-              </li>
-              <li className="nav-item">
-                <button
-                  type="button"
-                  className={`nav-link ${mode === 'register' ? 'active' : ''}`}
-                  onClick={() => setMode('register')}
-                >
-                  Регистрация
-                </button>
-              </li>
-            </ul>
+      <div className="flex justify-center px-3 sm:px-5">
+        <Card className="card-material" style={{ width: '320px', maxWidth: '100%', minHeight: '480px' }}>
+          <CardContent className="flex flex-col" style={{ overflowY: 'auto' }}>
+            <Tabs value={mode} onValueChange={setMode}>
+              <TabsList className="w-full auth-tabs mb-4">
+                <TabsTrigger value="login" className="flex-1">Вход</TabsTrigger>
+                <TabsTrigger value="register" className="flex-1">Регистрация</TabsTrigger>
+              </TabsList>
+            </Tabs>
 
-            <div className="flex-grow-1 d-flex flex-column justify-content-center">
-              {submitError && <div className="alert alert-danger">{submitError}</div>}
+            <div className="flex-1 flex flex-col justify-center">
+              {submitError && <Alert variant="destructive" className="mb-3">{submitError}</Alert>}
 
               {mode === 'login' ? (
                 <LoginForm onSubmit={handleSubmit} />
@@ -84,8 +86,8 @@ function HomePage() {
                 <RegisterForm onSubmit={handleSubmit} />
               )}
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </Layout>
   )

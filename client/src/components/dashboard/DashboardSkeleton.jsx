@@ -1,46 +1,39 @@
+import { Card, CardContent } from '../ui/card'
+import { Skeleton } from '../ui/skeleton'
+
 function DashboardSkeleton() {
   return (
     <>
-      <div className="row row-cols-2 row-cols-md-4 g-3 mb-4 align-items-stretch mx-0">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div className="col" key={index}>
-            <div className="card card-material h-100">
-              <div className="card-body d-flex flex-column gap-2">
-                <span className="skeleton skeleton-badge" />
-                <span
-                  className="skeleton skeleton-line"
-                  style={{ width: '60%', height: '1.5rem' }}
-                />
-                <span className="skeleton skeleton-line" style={{ width: '80%' }} />
-              </div>
-            </div>
-          </div>
+          <Card className="h-full" key={index}>
+            <CardContent className="flex flex-col gap-2">
+              <Skeleton className="size-12 rounded-xl" />
+              <Skeleton className="h-6 w-[60%]" />
+              <Skeleton className="h-3.5 w-[80%]" />
+            </CardContent>
+          </Card>
         ))}
       </div>
 
-      <div className="row row-cols-1 row-cols-md-2 g-3 mb-4 align-items-stretch mx-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
         {Array.from({ length: 2 }).map((_, index) => (
-          <div className="col" key={index}>
-            <div className="card card-material h-100">
-              <div className="card-body d-flex flex-column">
-                <span
-                  className="skeleton skeleton-line mb-3"
-                  style={{ width: '40%', height: '1rem' }}
-                />
-                <span className="skeleton theme-chart-area" />
-              </div>
-            </div>
-          </div>
+          <Card className="h-full" key={index}>
+            <CardContent className="flex flex-col">
+              <Skeleton className="h-4 w-[40%] mb-3" />
+              <Skeleton className="theme-chart-area" />
+            </CardContent>
+          </Card>
         ))}
       </div>
 
-      <div className="card card-material mb-4">
-        <div className="card-body d-flex flex-column gap-3">
+      <Card className="mb-4">
+        <CardContent className="flex flex-col gap-3">
           {Array.from({ length: 4 }).map((_, index) => (
-            <span key={index} className="skeleton skeleton-line" style={{ height: '1.25rem' }} />
+            <Skeleton key={index} className="h-5 w-full" />
           ))}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </>
   )
 }
