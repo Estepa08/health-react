@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/layout/SurveyLayout'
 import { fetchDistortionTypes, fetchDistortionTrainingAttempts } from '../../api/distortionTraining'
 import { summarizeByType } from '../../utils/distortionStats'
+import { Card, CardContent } from '@/components/ui/card'
 
 function TrainingTypesPage() {
   const navigate = useNavigate()
@@ -31,13 +32,13 @@ function TrainingTypesPage() {
   return (
     <Layout wide>
       <h4 className="text-center mb-4">Тренировка по искажениям</h4>
-      {error && <p className="text-danger text-center text-meta">{error}</p>}
+      {error && <p className="text-destructive text-center text-muted-foreground">{error}</p>}
       <div className="list-card-grid-container">
         {types.map((type) => {
           const progress = progressByType.get(type.slug)
           return (
-            <div
-              className="card card-material list-card list-card-grid"
+            <Card
+              className="card-material list-card list-card-grid"
               style={{ cursor: 'pointer' }}
               role="button"
               tabIndex={0}
@@ -50,13 +51,13 @@ function TrainingTypesPage() {
                 }
               }}
             >
-              <div className="card-body d-flex flex-column gap-2">
-                <h6 className="card-title theme-card-title mb-1 list-card-title">{type.nameRu}</h6>
-                <p className="text-meta mb-0 mt-auto list-card-progress">
+              <CardContent className="flex flex-col gap-2">
+                <h6 className="theme-card-title mb-1 list-card-title">{type.nameRu}</h6>
+                <p className="text-muted-foreground mb-0 mt-auto list-card-progress">
                   {progress ? `Пройдено: ${progress.timesPlayed} раз` : 'Ещё не пройдено'}
                 </p>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           )
         })}
       </div>

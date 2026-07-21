@@ -13,15 +13,21 @@ describe('TrendBadge', () => {
     expect(c3).toBeEmptyDOMElement()
   })
 
-  it('shows absolute value and "down" style for negative delta', () => {
+  it('shows absolute value and "positive" style for negative delta', () => {
     render(<TrendBadge delta={-5} />)
     expect(screen.getByText('5')).toBeInTheDocument()
-    expect(screen.getByText('5').closest('.trend-badge')).toHaveClass('trend-down')
+    expect(screen.getByText('5').closest('[data-slot="badge"]')).toHaveAttribute(
+      'data-variant',
+      'positive'
+    )
   })
 
-  it('shows absolute value and "up" style for positive delta', () => {
+  it('shows absolute value and "negative" style for positive delta', () => {
     render(<TrendBadge delta={3} />)
     expect(screen.getByText('3')).toBeInTheDocument()
-    expect(screen.getByText('3').closest('.trend-badge')).toHaveClass('trend-up')
+    expect(screen.getByText('3').closest('[data-slot="badge"]')).toHaveAttribute(
+      'data-variant',
+      'negative'
+    )
   })
 })

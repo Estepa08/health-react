@@ -5,6 +5,8 @@ import { fetchLastResult } from '../../api/results'
 import { fetchResultLevels } from '../../api/resultLevels'
 import { fetchThemes } from '../../api/themes'
 import { findResultLevel } from '../../utils/findResultLevel'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 function ResultPage() {
   const navigate = useNavigate()
@@ -62,9 +64,9 @@ function ResultPage() {
 
   return (
     <Layout>
-      <div className="d-flex justify-content-center px-3 px-sm-5">
-        <div className="card survey-card-width">
-          <div className="card-body">
+      <div className="flex justify-center px-3 sm:px-5">
+        <Card className="survey-card-width">
+          <CardContent>
             {themeTitle && <h1 className="result-page-title mb-3">{themeTitle}</h1>}
 
             <div className="result-panel">
@@ -74,7 +76,7 @@ function ResultPage() {
               <div className="result-gradient-bar" />
 
               {level && (
-                <div className="d-flex flex-column align-items-center text-center mt-4">
+                <div className="flex flex-col items-center text-center mt-4">
                   <img
                     src={isGoodResult ? '/images/good.png' : '/images/bad.png'}
                     alt=""
@@ -86,13 +88,13 @@ function ResultPage() {
               )}
             </div>
 
-            <div className="d-flex justify-content-center mt-4">
-              <button className="btn btn-primary" onClick={() => navigate('/survey')}>
+            <div className="flex justify-center mt-4">
+              <Button onClick={() => navigate('/survey')}>
                 Пройти заново
-              </button>
+              </Button>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </div>
     </Layout>
   )

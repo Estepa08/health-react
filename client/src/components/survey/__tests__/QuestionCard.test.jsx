@@ -46,9 +46,9 @@ describe('QuestionCard', () => {
       />
     )
 
-    expect(screen.getByRole('button', { name: 'Иногда' })).toHaveClass('btn-primary')
+    expect(screen.getByRole('button', { name: 'Иногда' })).toHaveClass('bg-primary')
     expect(screen.getByRole('button', { name: 'Часто' })).toHaveClass('btn-success')
-    expect(screen.getByRole('button', { name: 'Никогда' })).toHaveClass('btn-outline-primary')
+    expect(screen.getByRole('button', { name: 'Никогда' })).toHaveClass('border-border')
   })
 
   it('disables all buttons when disabled is true', () => {

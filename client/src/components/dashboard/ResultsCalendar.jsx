@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons'
+import { HugeiconsIcon } from '@hugeicons/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@hugeicons/core-free-icons'
+import { Card, CardContent } from '../ui/card'
 import { groupResultsByDate } from '../../utils/dashboardStats'
 import { findResultLevel } from '../../utils/findResultLevel'
 
@@ -40,18 +42,18 @@ function ResultsCalendar({ results, resultLevels }) {
   }
 
   return (
-    <div className="card card-material mb-4">
-      <div className="card-body">
-        <div className="d-flex align-items-center justify-content-between mb-3">
+    <Card className="mb-4">
+      <CardContent>
+        <div className="flex items-center justify-between mb-3">
           <button
             type="button"
             className="calendar-nav-btn"
             onClick={() => goToMonth(-1)}
             aria-label="Предыдущий месяц"
           >
-            <ChevronLeft />
+            <HugeiconsIcon icon={ChevronLeftIcon} size={16} />
           </button>
-          <div className="fw-semibold text-capitalize">
+          <div className="font-semibold capitalize">
             {monthDate.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' })}
           </div>
           <button
@@ -60,7 +62,7 @@ function ResultsCalendar({ results, resultLevels }) {
             onClick={() => goToMonth(1)}
             aria-label="Следующий месяц"
           >
-            <ChevronRight />
+            <HugeiconsIcon icon={ChevronRightIcon} size={16} />
           </button>
         </div>
 
@@ -114,8 +116,8 @@ function ResultsCalendar({ results, resultLevels }) {
             )
           })}
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 

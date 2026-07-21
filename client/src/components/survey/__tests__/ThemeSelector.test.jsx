@@ -2,6 +2,33 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import ThemeSelector from '../ThemeSelector'
 
+beforeAll(() => {
+  class MockResizeObserver {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  vi.stubGlobal('ResizeObserver', MockResizeObserver)
+  vi.stubGlobal('matchMedia', vi.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })))
+  class MockIntersectionObserver {
+    constructor() {}
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  }
+  vi.stubGlobal('IntersectionObserver', MockIntersectionObserver)
+})
+
 const themes = [
   { id: 'anxiety', title: 'Тревога', description: 'Оцените уровень тревоги' },
   { id: 'burnout', title: 'Выгорание', description: 'Оцените уровень выгорания' },

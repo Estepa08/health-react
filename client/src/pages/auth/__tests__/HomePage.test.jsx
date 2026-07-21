@@ -113,10 +113,10 @@ describe('HomePage', () => {
     const { default: userEvent } = await import('@testing-library/user-event')
     const user = userEvent.setup()
 
-    await user.click(screen.getByRole('button', { name: 'Регистрация' }))
+    await user.click(screen.getByRole('tab', { name: 'Регистрация' }))
     expect(screen.getByRole('button', { name: 'Зарегистрироваться' })).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Вход' }))
+    await user.click(screen.getByRole('tab', { name: 'Вход' }))
     expect(screen.getByRole('button', { name: 'Войти' })).toBeInTheDocument()
   })
 })

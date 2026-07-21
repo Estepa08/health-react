@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Progress } from '@/components/ui/progress'
 import Layout from '../../components/layout/SurveyLayout'
 import DistortionCard from '../../components/distortion/DistortionCard'
 import DistortionOnboarding from '../../components/distortion/DistortionOnboarding'
@@ -68,7 +70,7 @@ function DistortionGamePage() {
   if (loading) {
     return (
       <Layout>
-        <p className="text-center text-meta">Загрузка карточек...</p>
+        <p className="text-center text-muted-foreground">Загрузка карточек...</p>
       </Layout>
     )
   }
@@ -76,11 +78,11 @@ function DistortionGamePage() {
   if (error) {
     return (
       <Layout>
-        <p className="text-danger text-center text-meta">{error}</p>
+        <p className="text-destructive text-center text-muted-foreground">{error}</p>
         <div className="text-center">
-          <button className="btn btn-primary" onClick={() => navigate('/distortions')}>
+          <Button onClick={() => navigate('/distortions')}>
             Назад к списку игр
-          </button>
+          </Button>
         </div>
       </Layout>
     )
@@ -100,10 +102,8 @@ function DistortionGamePage() {
     <Layout
       progressBar={
         <div>
-          <div className="progress">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="text-center text-caption mt-2">
+          <Progress value={progress} />
+          <p className="text-center text-xs text-muted-foreground mt-2">
             {currentIndex + 1} / {cards.length}
           </p>
         </div>

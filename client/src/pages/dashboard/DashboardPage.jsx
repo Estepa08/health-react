@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '../../components/layout/DashboardLayout'
+import { Button } from '@/components/ui/button'
 import DashboardSkeleton from '../../components/dashboard/DashboardSkeleton'
 import StatCardsSection from '../../components/dashboard/StatCardsSection'
 import ResultsCalendar from '../../components/dashboard/ResultsCalendar'
@@ -11,6 +13,7 @@ import { computeStats, formatDate, groupByTheme } from '../../utils/dashboardSta
 import { groupByGame } from '../../utils/distortionStats'
 
 function DashboardPage() {
+  const navigate = useNavigate()
   const { results, resultLevels, distortionAttempts, error } = useDashboardData()
 
   const stats = useMemo(() => computeStats(results), [results])
@@ -43,8 +46,11 @@ function DashboardPage() {
   if (results.length === 0 && distortionGameGroups.length === 0) {
     return (
       <DashboardLayout>
-        <div className="text-center d-flex flex-column gap-2 align-items-center">
-          <p className="text-meta mb-2">У вас пока нет пройденных тестов.</p>
+        <div className="flex flex-col items-center gap-3 text-center py-12">
+          <p className="text-muted-foreground">
+            Здесь появится ваша статистика, как только вы пройдёте первый тест.
+          </p>
+          <Button onClick={() => navigate('/survey')}>Пройти первый тест</Button>
         </div>
       </DashboardLayout>
     )
